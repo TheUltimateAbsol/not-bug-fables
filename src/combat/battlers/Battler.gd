@@ -29,6 +29,7 @@ export var turn_order_icon: Texture
 
 func _ready() -> void:
 	var direction: Vector2 = Vector2(-1.0, 0.0) if party_member else Vector2(1.0, 0.0)
+	#WTH is this?
 	target_global_position = $TargetAnchor.global_position + direction * TARGET_OFFSET_DISTANCE
 	selectable = true
 

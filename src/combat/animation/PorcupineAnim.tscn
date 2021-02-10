@@ -4,9 +4,8 @@
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/battlers/porcupine.png" type="Texture" id=3]
 
-
-
 [node name="PorcupineAnim" instance=ExtResource( 1 )]
+position = Vector2( -40.7128, 0 )
 
 [node name="shadow" type="Sprite" parent="." index="0"]
 position = Vector2( 0.821854, -0.67099 )
@@ -22,4 +21,3 @@ texture = ExtResource( 3 )
 position = Vector2( 0, -66.6667 )
 size = Vector2( 230, 152.667 )
 offset = Vector2( 10, 0 )
-
