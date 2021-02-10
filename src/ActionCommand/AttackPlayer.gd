@@ -6,12 +6,19 @@ var target:Battler
 signal input_received
 signal attack_ended
 
+func clear_effects():
+	for node in get_parent().get_children():
+		if node.is_in_group("effect"):
+			node.hide()
+
+func _ready():
+	clear_effects()
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		emit_signal("input_received")
 
-func skip_to_next(arg):
+func skip_to_next():
 	assert(current_animation != null)
 	
 	var idx = get_animation(current_animation).find_track("AttackPlayer:segment")
@@ -22,13 +29,14 @@ func skip_to_next(arg):
 	print("success")
 
 func start_input_listen():
-	connect("input_received", self, "skip_to_next", [CONNECT_ONESHOT])
+	connect("input_received", self, "skip_to_next", [], CONNECT_ONESHOT)
 	
 func end_input_listen():
 	disconnect("input_received", self, "skip_to_next")
 	failure()
 
 func failure():
+	clear_effects()
 	#set up animation track to blend
 	var anim = get_animation("Failure")
 	var position = get_parent().position

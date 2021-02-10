@@ -38,7 +38,7 @@ func play_shoot(target):
 	#set target position
 	var target_position = to_local(target.target_global_position)
 	var anim = $AttackPlayer.get_animation("Shoot")
-	var track_idx = anim.find_track("Effects/arrow:position:x")
+	var track_idx = anim.find_track("arrow:position:x")
 	var front = anim.bezier_track_get_key_value(track_idx, anim.track_get_key_count(track_idx) - 1)
 	var back = anim.bezier_track_get_key_value(track_idx, anim.track_get_key_count(track_idx) - 3)
 	var mid = (front+back)/2
