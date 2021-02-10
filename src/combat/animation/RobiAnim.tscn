@@ -28,9 +28,8 @@ offset = Vector2( 4, 0 )
 [node name="Effects" type="Node" parent="." index="4"]
 
 [node name="arrow" type="Sprite" parent="Effects" index="0"]
-visible = false
-position = Vector2( 879.193, -90.9752 )
-rotation = 0.380482
+position = Vector2( 68.3373, -91.9362 )
+rotation = -0.174533
 scale = Vector2( 0.184933, 0.184933 )
 texture = ExtResource( 5 )
 
@@ -44,4 +43,5 @@ texture = ExtResource( 6 )
 [node name="AttackPlayer" type="AnimationPlayer" parent="." index="5"]
 anims/Shoot = ExtResource( 7 )
 script = ExtResource( 4 )
-segment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
