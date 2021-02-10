@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/combat/animation/BattlerAnim.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/battlers/porcupine.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/battlers/test_enemy.png" type="Texture" id=3]
 
 [node name="PorcupineAnim" instance=ExtResource( 1 )]
 position = Vector2( -40.7128, 0 )

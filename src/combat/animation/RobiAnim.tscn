@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/combat/animation/BattlerAnim.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/battlers/robi.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/battlers/Ghost Ant.png" type="Texture" id=3]
+[ext_resource path="res://src/ActionCommand/AttackPlayer.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/weapons/arrow.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/weapons/Sparkle.png" type="Texture" id=6]
+[ext_resource path="res://src/ActionCommand/AttackAnim.tres" type="Animation" id=7]
 
 [node name="RobiAnim" instance=ExtResource( 1 )]
-position = Vector2( -40.7128, 0 )
 
 [node name="shadow" type="Sprite" parent="." index="0"]
 position = Vector2( 0.136375, -0.935276 )
@@ -13,11 +16,32 @@ scale = Vector2( 0.727239, 0.870552 )
 texture = ExtResource( 2 )
 
 [node name="body" type="Sprite" parent="." index="1"]
-position = Vector2( 5.30737, -108.186 )
-scale = Vector2( 0.75, 0.75 )
+position = Vector2( 20.743, -100 )
+scale = Vector2( 0.262204, 0.262204 )
 texture = ExtResource( 3 )
 
 [node name="RectExtents" parent="." index="3"]
 position = Vector2( -0.444458, -106.667 )
 size = Vector2( 190.889, 234.667 )
 offset = Vector2( 4, 0 )
+
+[node name="Effects" type="Node" parent="." index="4"]
+
+[node name="arrow" type="Sprite" parent="Effects" index="0"]
+visible = false
+position = Vector2( 879.193, -90.9752 )
+rotation = 0.380482
+scale = Vector2( 0.184933, 0.184933 )
+texture = ExtResource( 5 )
+
+[node name="Sparkle" type="Sprite" parent="Effects" index="1"]
+visible = false
+position = Vector2( -91.2019, -180.748 )
+rotation = 4.71239
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 6 )
+
+[node name="AttackPlayer" type="AnimationPlayer" parent="." index="5"]
+anims/Shoot = ExtResource( 7 )
+script = ExtResource( 4 )
+segment = 1

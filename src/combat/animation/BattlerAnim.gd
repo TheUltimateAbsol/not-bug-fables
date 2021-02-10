@@ -29,3 +29,23 @@ func play_jump(target):
 	
 	$AttackPlayer.play("Jump");
 	yield($AttackPlayer, "attack_ended")
+	
+	
+func play_shoot(target):
+	$AttackPlayer.attacker = battler
+	$AttackPlayer.target = target
+	
+	#set target position
+	var target_position = to_local(target.target_global_position)
+	var anim = $AttackPlayer.get_animation("Shoot")
+	var track_idx = anim.find_track("Effects/arrow:position:x")
+	anim.get_track_count() - 1
+	anim.track_get_key_count(track_idx)
+	var mid = (anim.track_get_key_value(track_idx, anim.track_get_key_count(track_idx) - 1) + anim.track_get_key_value(track_idx, anim.track_get_key_count(track_idx) - 3))/2
+	anim.track_set_key_value(track_idx, anim.track_get_key_count(track_idx) - 1, target_position.x)
+	anim.track_set_key_value(track_idx, anim.track_get_key_count(track_idx) - 2, mid)
+	anim.track_set_key_value(anim.find_track(".:position"), 2, target_position)
+	
+	$AttackPlayer.play("Shoot");
+	yield($AttackPlayer, "attack_ended")
+
