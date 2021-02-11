@@ -1,7 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="GDScript" id=1]
-
 script/source = "extends Node2D
 
 export var combat_template : Resource
@@ -17,5 +16,3 @@ func _get_display_name():
 
 [node name="FormationMember" type="Position2D"]
 script = SubResource( 1 )
-combat_template = null
-

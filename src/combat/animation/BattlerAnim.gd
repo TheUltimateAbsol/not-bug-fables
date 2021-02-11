@@ -29,3 +29,22 @@ func play_jump(target):
 	
 	$AttackPlayer.play("Jump");
 	yield($AttackPlayer, "attack_ended")
+	
+	
+func play_shoot(target):
+	$AttackPlayer.attacker = battler
+	$AttackPlayer.target = target
+	
+	#set target position
+	var target_position = to_local(target.target_global_position)
+	var anim = $AttackPlayer.get_animation("Shoot")
+	var track_idx = anim.find_track("arrow:position:x")
+	var front = anim.bezier_track_get_key_value(track_idx, anim.track_get_key_count(track_idx) - 1)
+	var back = anim.bezier_track_get_key_value(track_idx, anim.track_get_key_count(track_idx) - 3)
+	var mid = (front+back)/2
+	anim.bezier_track_set_key_value(track_idx, anim.track_get_key_count(track_idx) - 1, target_position.x)
+	anim.bezier_track_set_key_value(track_idx, anim.track_get_key_count(track_idx) - 2, mid)
+	
+	$AttackPlayer.play("Shoot");
+	yield($AttackPlayer, "attack_ended")
+
