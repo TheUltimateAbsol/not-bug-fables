@@ -10,13 +10,13 @@ script = ExtResource( 1 )
 platform_template = ExtResource( 2 )
 
 [node name="Porcupine3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1662.3, 500.211 )
+position = Vector2( 1629.3, 828.678 )
 turn_order_icon = ExtResource( 4 )
 
 [node name="Porcupine2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1416.14, 604.103 )
+position = Vector2( 1416.14, 895.345 )
 turn_order_icon = ExtResource( 4 )
 
 [node name="Porcupine" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1578.9, 788.876 )
+position = Vector2( 1629.3, 1018.18 )
 turn_order_icon = ExtResource( 4 )

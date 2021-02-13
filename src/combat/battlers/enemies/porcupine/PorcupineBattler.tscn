@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/combat/battlers/Battler.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/combat/battlers/enemies/porcupine/Porcupine.tres" type="Resource" id=2]
 [ext_resource path="res://src/combat/animation/PorcupineAnim.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/combat/battlers/ai/RandomAI.gd" type="Script" id=4]
+[ext_resource path="res://src/combat/battlers/actions/Attack.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/combat/battlers/actions/CPU_Ram.gd" type="Script" id=6]
 
 [node name="Porcupine" groups=[
 "enemies",
@@ -11,6 +13,9 @@
 stats = ExtResource( 2 )
 
 [node name="PorcupineAnim" parent="Skin" index="2" instance=ExtResource( 3 )]
+
+[node name="CPU_Ram" parent="Actions" index="0" instance=ExtResource( 5 )]
+script = ExtResource( 6 )
 
 [node name="Drops" parent="." index="5"]
 experience = 2
