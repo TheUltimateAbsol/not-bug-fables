@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/party/Party.gd" type="Script" id=1]
 [ext_resource path="res://src/party/PartyMember.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://src/combat/battlers/skills/Slash.tres" type="Resource" id=13]
 [ext_resource path="res://src/map/pawns/RobiPawnAnim.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/combat/battlers/actions/Shoot.gd" type="Script" id=15]
+[ext_resource path="res://src/combat/battlers/actions/Attack.gd" type="Script" id=16]
+[ext_resource path="res://src/combat/battlers/actions/Attack.tscn" type="PackedScene" id=17]
 
 [node name="Party" type="Node2D"]
 script = ExtResource( 1 )
@@ -29,6 +31,9 @@ turn_order_icon = ExtResource( 4 )
 
 [node name="GodetteAnim" parent="Godette/Battler/Skin" index="2" instance=ExtResource( 5 )]
 battler_node = NodePath("../..")
+
+[node name="Attack" parent="Godette/Battler/Actions" index="0" instance=ExtResource( 17 )]
+script = ExtResource( 16 )
 
 [node name="LolliSlash" parent="Godette/Battler/Skills" index="0" instance=ExtResource( 6 )]
 skill = ExtResource( 7 )
@@ -49,7 +54,7 @@ turn_order_icon = ExtResource( 11 )
 [node name="RobiAnim" parent="Robi/Battler/Skin" index="2" instance=ExtResource( 12 )]
 battler_node = NodePath("../..")
 
-[node name="Attack" parent="Robi/Battler/Actions" index="0"]
+[node name="Shoot" parent="Robi/Battler/Actions" index="0" instance=ExtResource( 17 )]
 script = ExtResource( 15 )
 
 [node name="Slash" parent="Robi/Battler/Skills" index="0" instance=ExtResource( 6 )]

@@ -3,6 +3,7 @@ extends AnimationPlayer
 export (int) var segment:int = 0
 var attacker:Battler
 var target:Battler
+var block_received:bool = false
 signal input_received
 signal attack_ended
 
@@ -34,6 +35,16 @@ func start_input_listen():
 func end_input_listen():
 	disconnect("input_received", self, "skip_to_next")
 	failure()
+	
+func input_block():
+	block_received = true
+
+func start_block_listen():
+	block_received = false
+	connect("input_received", self, "input_block", [], CONNECT_ONESHOT)
+	
+func end_block_listen():
+	disconnect("input_received", self, "input_block")
 
 func failure():
 	clear_effects()
@@ -55,10 +66,10 @@ func failure():
 	
 	play("Failure")
 	
-func damage():
+func damage(multiplier=1.0):
 	assert(target)
 	assert(attacker)
-	var hit = Hit.new(attacker.stats.strength)
+	var hit = Hit.new(attacker.stats.strength*multiplier)
 	target.take_damage(hit)
 
 func end_attack():
