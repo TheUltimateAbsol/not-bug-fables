@@ -21,10 +21,10 @@ script = ExtResource( 1 )
 [node name="Party" type="Node" parent="SpawnPositions"]
 
 [node name="1" type="Position2D" parent="SpawnPositions/Party"]
-position = Vector2( 545.084, 789.497 )
+position = Vector2( 566.441, 581.262 )
 
 [node name="2" type="Position2D" parent="SpawnPositions/Party"]
-position = Vector2( 406.726, 926.089 )
+position = Vector2( 428.083, 717.854 )
 
 [node name="TurnQueue" parent="." instance=ExtResource( 2 )]
 z_index = 10

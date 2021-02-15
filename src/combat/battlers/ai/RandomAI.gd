@@ -4,11 +4,13 @@ const DEFAULT_CHANCE = 0.75
 
 
 func choose_action(actor: Battler, battlers: Array = []):
-	# For now, we just choose the first action on a battler
-	# we use yield even though determining an action is instantaneous
-	# because the combat arena expects this to be an async function
-	yield(get_tree(), "idle_frame")
-	return actor.actions.get_child(0)
+	# For now, we just choose a random action
+	# It would be nice if there was AI
+	yield(get_tree(), "idle_frame") #this is so it's async
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var rand_number = rng.randi_range(0, actor.actions.get_child_count()-1)
+	return actor.actions.get_child(rand_number)
 
 
 func choose_target(actor: Battler, action: CombatAction, battlers: Array = []):

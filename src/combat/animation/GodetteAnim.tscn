@@ -1,28 +1,35 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/combat/animation/BattlerAnim.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/battlers/Leaf Cutter Ant.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/battlers/Leafcutter Ant/Leafcutter Ant.png" type="Texture" id=3]
 [ext_resource path="res://src/ActionCommand/AttackPlayer.gd" type="Script" id=4]
 [ext_resource path="res://src/ActionCommand/FailAnim2.tres" type="Animation" id=5]
 [ext_resource path="res://src/ActionCommand/202641__cs279__clang-ping.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sprites/battlers/Leafcutter Ant/Leafcutter Ant (hurt).png" type="Texture" id=7]
 [ext_resource path="res://src/ActionCommand/471156__worldmaxter__chair-smack.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/sprites/battlers/Leafcutter Ant/Leafcutter Ant (block).png" type="Texture" id=9]
+[ext_resource path="res://src/ActionCommand/415767__inspectorj__tearing-newspaper-a.wav" type="AudioStream" id=10]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "block",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Jump"
+[sub_resource type="Animation" id=2]
 length = 1.5
 step = 0.05
 tracks/0/type = "value"
@@ -130,8 +137,7 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.3, 0.6, 0.65, 0.9, 1.2 )
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Block"
+[sub_resource type="Animation" id=3]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("body:animation")
@@ -154,8 +160,38 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "clips": [ {
 "end_offset": 0.0,
-"start_offset": 0.02,
+"start_offset": 0.0,
 "stream": ExtResource( 6 )
+} ],
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("body:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "hurt", "default" ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
 } ],
 "times": PoolRealArray( 0 )
 }
@@ -168,9 +204,11 @@ scale = Vector2( 0.762084, 1.14634 )
 texture = ExtResource( 2 )
 
 [node name="body" type="AnimatedSprite" parent="." index="1"]
-position = Vector2( 26.8854, -98.6652 )
-scale = Vector2( 0.573434, 0.573434 )
-frames = SubResource( 3 )
+position = Vector2( 26.8854, -98.7847 )
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 1 )
+playing = true
+offset = Vector2( -35, 40 )
 
 [node name="RectExtents" parent="." index="3"]
 position = Vector2( 3.11111, -108.444 )
@@ -178,11 +216,12 @@ size = Vector2( 165.333, 223.556 )
 
 [node name="AttackPlayer" type="AnimationPlayer" parent="." index="4"]
 anims/Failure = ExtResource( 5 )
-anims/Jump = SubResource( 1 )
+anims/Jump = SubResource( 2 )
 script = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="5"]
-stream = ExtResource( 6 )
+stream = ExtResource( 10 )
 
 [node name="CharacterAnimation" type="AnimationPlayer" parent="." index="6"]
-anims/Block = SubResource( 2 )
+anims/Block = SubResource( 3 )
+anims/Hurt = SubResource( 4 )

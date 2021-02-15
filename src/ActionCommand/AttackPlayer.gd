@@ -66,10 +66,10 @@ func failure():
 	
 	play("Failure")
 	
-func damage(multiplier=1.0):
+func damage():
 	assert(target)
 	assert(attacker)
-	var hit = Hit.new(attacker.stats.strength*multiplier)
+	var hit = Hit.new(attacker.stats.strength)
 	target.take_damage(hit)
 
 func end_attack():

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/415767__inspectorj__tearing-newspaper-a.wav-90f47595dc62b5f19254d0edf9b22c74.sample"
+
+[deps]
+
+source_file="res://src/ActionCommand/415767__inspectorj__tearing-newspaper-a.wav"
+dest_files=[ "res://.import/415767__inspectorj__tearing-newspaper-a.wav-90f47595dc62b5f19254d0edf9b22c74.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

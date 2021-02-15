@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/413044__z-er0__serpent-chomp-s.wav-91520a87cee43bd5b816cd1c95ad148b.sample"
+
+[deps]
+
+source_file="res://src/ActionCommand/413044__z-er0__serpent-chomp-s.wav"
+dest_files=[ "res://.import/413044__z-er0__serpent-chomp-s.wav-91520a87cee43bd5b816cd1c95ad148b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
