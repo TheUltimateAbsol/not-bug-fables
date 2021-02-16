@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/411494__inspectorj__jew-s-harp-single-a-h1.wav-ce0a9fc462a7596669f86d7d5aceca52.sample"
+
+[deps]
+
+source_file="res://src/ActionCommand/411494__inspectorj__jew-s-harp-single-a-h1.wav"
+dest_files=[ "res://.import/411494__inspectorj__jew-s-harp-single-a-h1.wav-ce0a9fc462a7596669f86d7d5aceca52.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

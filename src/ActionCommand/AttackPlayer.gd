@@ -4,16 +4,17 @@ export (int) var segment:int = 0
 var attacker:Battler
 var target:Battler
 var block_received:bool = false
+var input_received:bool = false
 signal input_received
 signal attack_ended
 
 func clear_effects():
-	for node in get_parent().get_children():
-		if node.is_in_group("effect"):
-			node.hide()
+	for node in get_tree().get_nodes_in_group("effect"):
+		node.hide()
 
 func _ready():
 	clear_effects()
+	connect("animation_finished", self, "end_attack")
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
@@ -21,20 +22,16 @@ func _input(event):
 
 func skip_to_next():
 	assert(current_animation != null)
-	
-	var idx = get_animation(current_animation).find_track("AttackPlayer:segment")
-	var target = clamp(segment + 1, 0, get_animation(current_animation).track_get_key_count(idx))
-	var target_time = get_animation(current_animation).track_get_key_time(idx, segment + 1)
-	
-	seek(target_time)
+	input_received = true
 	print("success")
+	end_attack()
 
 func start_input_listen():
+	input_received = false
 	connect("input_received", self, "skip_to_next", [], CONNECT_ONESHOT)
 	
 func end_input_listen():
 	disconnect("input_received", self, "skip_to_next")
-	failure()
 	
 func input_block():
 	block_received = true
@@ -66,11 +63,12 @@ func failure():
 	
 	play("Failure")
 	
-func damage(multiplier=1.0):
+func damage():
 	assert(target)
 	assert(attacker)
-	var hit = Hit.new(attacker.stats.strength*multiplier)
+	var hit = Hit.new(attacker.stats.strength)
 	target.take_damage(hit)
 
-func end_attack():
+func end_attack(anim_name="idontcare"):
+	clear_effects()
 	emit_signal("attack_ended")
