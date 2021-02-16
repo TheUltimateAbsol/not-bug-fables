@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/combat/animation/BattlerAnim.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=2]
@@ -20,69 +20,18 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "hurt",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "block",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=2]
-length = 1.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("body:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 90.0, 90.0, 0.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 109.407, 0 ), Vector2( 109.407, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("body:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( -237.948, 0, 0, 0.25, 0, -25.061, 0, 0, 0.25, 0, -25.061, 0, 0, 0.25, 0, -100, -0.25, 0, 0.25, 0, -100, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 1.2 )
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("AttackPlayer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 1.2 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "end_attack"
-} ]
-}
-
-[sub_resource type="Animation" id=3]
 resource_name = "Reset"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -145,141 +94,7 @@ tracks/4/keys = {
 "values": [ "default" ]
 }
 
-[sub_resource type="Animation" id=4]
-length = 2.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("AttackPlayer:segment")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1.05 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 1 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("AttackPlayer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.6 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "start_input_listen"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("AttackPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "end_input_listen"
-} ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("AttackPlayer")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 1.4 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "damage"
-} ]
-}
-tracks/4/type = "method"
-tracks/4/path = NodePath("AttackPlayer")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 1.9 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "end_attack"
-} ]
-}
-tracks/5/type = "audio"
-tracks/5/path = NodePath("AudioStreamPlayer")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.05,
-"stream": ExtResource( 8 )
-} ],
-"times": PoolRealArray( 1.4 )
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Sparkle:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("body:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0, 0.2, 1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, -17.3, -17.3, 0.0 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Sparkle:rotation_degrees")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0.8, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 270.0 ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("Sparkle:scale")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0.8, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 0.413618, 0.413618 ), Vector2( 1e-05, 1e-05 ) ]
-}
-
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=3]
 resource_name = "Shoot_Fail"
 length = 2.5
 step = 0.05
@@ -366,7 +181,7 @@ tracks/6/keys = {
 "times": PoolRealArray(  )
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=4]
 resource_name = "Shoot_Fail2"
 tracks/0/type = "value"
 tracks/0/path = NodePath("ArrowFail2/PathFollow2D:unit_offset")
@@ -419,7 +234,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=5]
 resource_name = "Shoot_Success"
 length = 0.4
 step = 0.05
@@ -496,7 +311,7 @@ tracks/5/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( -28.6055, 0 ), Vector2( -28.6055, 0 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=6]
 resource_name = "Shoot_Success_Hit"
 length = 0.5
 tracks/0/type = "audio"
@@ -643,7 +458,7 @@ tracks/9/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=8]
 length = 0.4
 tracks/0/type = "audio"
 tracks/0/path = NodePath("AudioStreamPlayer")
@@ -672,7 +487,7 @@ tracks/1/keys = {
 "values": [ "block", "default" ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 length = 0.4
 tracks/0/type = "audio"
 tracks/0/path = NodePath("AudioStreamPlayer")
@@ -701,7 +516,7 @@ tracks/1/keys = {
 "values": [ "hurt", "default" ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=10]
 resource_name = "Shoot"
 length = 4.0
 step = 0.05
@@ -716,7 +531,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.3, 1.9 )
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=11]
 resource_name = "Shoot_Fail"
 length = 5.0
 step = 0.05
@@ -731,28 +546,27 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.3, 3.85 )
 }
 
-[sub_resource type="Curve2D" id=9]
+[sub_resource type="Curve2D" id=12]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 30.7272, -107.955, 0, 0, 0, 0, -14.6812, -86.9322 )
 }
 
-[sub_resource type="Curve2D" id=10]
+[sub_resource type="Curve2D" id=13]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -14.6812, -86.9322, -241.227, 5.99323, 241.227, -5.99323, 686.221, -209.497, 0, 0, 0, 0, 1379.11, -101.432 )
 }
 
-[sub_resource type="Curve2D" id=13]
+[sub_resource type="Curve2D" id=14]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, -14.6812, -86.9322, -722.871, 6.45989, 722.871, -6.45989, 709.597, -1669.6, 0, 0, 0, 0, 1379.11, -101.432 )
 }
 
-[sub_resource type="Curve2D" id=17]
+[sub_resource type="Curve2D" id=15]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1379.11, -101.432, -176.003, -11.8921, 176.003, 11.8921, 1672.08, -412.947, 0, 0, 0, 0, 1894.69, 664.912 )
 }
 
 [node name="RobiAnim" instance=ExtResource( 1 )]
-position = Vector2( -21.4541, 0 )
 
 [node name="shadow" type="Sprite" parent="." index="0"]
 position = Vector2( 1.196, 0 )
@@ -760,11 +574,9 @@ scale = Vector2( 0.727239, 0.870552 )
 texture = ExtResource( 2 )
 
 [node name="body" type="AnimatedSprite" parent="." index="1"]
-position = Vector2( 0.922893, -109.117 )
-rotation = -0.201295
+position = Vector2( 20.743, -110.703 )
 scale = Vector2( 0.262204, 0.262204 )
 frames = SubResource( 1 )
-animation = "block"
 offset = Vector2( -50, 0 )
 
 [node name="RectExtents" parent="." index="3"]
@@ -773,13 +585,11 @@ size = Vector2( 190.889, 234.667 )
 offset = Vector2( 4, 0 )
 
 [node name="AttackPlayer" type="AnimationPlayer" parent="." index="4"]
-anims/Failure = SubResource( 2 )
-anims/Reset = SubResource( 3 )
-anims/Shoot = SubResource( 4 )
-anims/Shoot_Fail = SubResource( 14 )
-anims/Shoot_Fail2 = SubResource( 16 )
-anims/Shoot_Success = SubResource( 11 )
-anims/Shoot_Success_Hit = SubResource( 18 )
+anims/Reset = SubResource( 2 )
+anims/Shoot_Fail = SubResource( 3 )
+anims/Shoot_Fail2 = SubResource( 4 )
+anims/Shoot_Success = SubResource( 5 )
+anims/Shoot_Success_Hit = SubResource( 6 )
 anims/Shoot_Windup = SubResource( 7 )
 script = ExtResource( 4 )
 
@@ -796,19 +606,19 @@ scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 6 )
 
 [node name="CharacterAnimation" type="AnimationPlayer" parent="." index="7"]
-anims/Block = SubResource( 5 )
-anims/Hurt = SubResource( 6 )
+anims/Block = SubResource( 8 )
+anims/Hurt = SubResource( 9 )
 
 [node name="test" type="AnimationPlayer" parent="." index="8"]
-anims/Shoot = SubResource( 12 )
-anims/Shoot_Fail = SubResource( 15 )
+anims/Shoot = SubResource( 10 )
+anims/Shoot_Fail = SubResource( 11 )
 
 [node name="ArrowWindup" type="Path2D" parent="." index="9"]
-curve = SubResource( 9 )
+curve = SubResource( 12 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ArrowWindup" index="0"]
 position = Vector2( -14.055, -87.2221 )
-rotation = 2.708
+rotation = 2.70801
 offset = 49.0405
 loop = false
 
@@ -822,23 +632,24 @@ scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 10 )
 
 [node name="ArrowShoot" type="Path2D" parent="." index="10"]
-curve = SubResource( 10 )
+curve = SubResource( 13 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ArrowShoot" index="0"]
 position = Vector2( 154.385, -126.548 )
-rotation = -0.217021
+rotation = -0.217023
 offset = 173.721
 loop = false
 
 [node name="arrow" type="Sprite" parent="ArrowShoot/PathFollow2D" index="0" groups=[
 "effect",
 ]]
+visible = false
 position = Vector2( 20, 0 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 10 )
 
 [node name="ArrowFail" type="Path2D" parent="." index="11"]
-curve = SubResource( 13 )
+curve = SubResource( 14 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ArrowFail" index="0"]
 position = Vector2( 1379.99, -176.497 )
@@ -855,10 +666,10 @@ scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 10 )
 
 [node name="ArrowFail2" type="Path2D" parent="." index="12"]
-curve = SubResource( 17 )
+curve = SubResource( 15 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="ArrowFail2" index="0"]
-position = Vector2( 1893.13, 633.493 )
+position = Vector2( 1892.88, 628.863 )
 rotation = 1.48258
 offset = 1544.86
 rotate = false
