@@ -1,8 +1,5 @@
 extends AnimationPlayer
 
-export (int) var segment:int = 0
-var attacker:Battler
-var target:Battler
 var block_received:bool = false
 var input_received:bool = false
 signal input_received
@@ -42,32 +39,6 @@ func start_block_listen():
 	
 func end_block_listen():
 	disconnect("input_received", self, "input_block")
-
-func failure():
-	clear_effects()
-	#set up animation track to blend
-	var anim = get_animation("Failure")
-	var position = get_parent().position
-	
-	var track_position_diff = anim.track_get_key_value(anim.find_track(".:position"), 1) - anim.track_get_key_value(anim.find_track(".:position"), 0)
-	var body_rotation = get_parent().get_node("body").rotation_degrees
-	var body_position = get_parent().get_node("body").position
-	anim.track_set_key_value(anim.find_track("body:position:y"), 0, body_position.y)
-	anim.track_set_key_value(anim.find_track("body:rotation_degrees"), 0, body_rotation)	
-	
-	anim.track_set_key_value(anim.find_track(".:position"), 0, position)
-	anim.track_set_key_value(anim.find_track(".:position"), 1, position + track_position_diff)
-	anim.track_set_key_value(anim.find_track(".:position"), 2, position + track_position_diff)
-	anim.track_set_key_value(anim.find_track(".:position"), 3, position)
-	anim.track_set_key_value(anim.find_track(".:position"), 4, position)
-	
-	play("Failure")
-	
-func damage():
-	assert(target)
-	assert(attacker)
-	var hit = Hit.new(attacker.stats.strength)
-	target.take_damage(hit)
 
 func end_attack(anim_name="idontcare"):
 	clear_effects()
