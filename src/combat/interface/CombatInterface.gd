@@ -10,7 +10,7 @@ onready var popup = $PopUpHandler
 onready var select_arrow = $SelectArrow
 onready var turn_order = $TurnOrder
 
-export var buttons_offset: Vector2 = Vector2(-75.0, 0.0)
+export var buttons_offset: Vector2 = Vector2(0.0, -250.0) #Vector2(-75.0, 0.0)
 
 
 func initialize(combat_arena: CombatArena, turn_queue: TurnQueue, battlers: Array):

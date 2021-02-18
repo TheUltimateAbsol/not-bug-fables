@@ -6,9 +6,7 @@
 [ext_resource path="res://assets/fonts/default_theme/montserrat_eb_48.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/sprites/select_arrow.png" type="Texture" id=5]
 
-
 [sub_resource type="Animation" id=1]
-
 resource_name = "wiggle"
 length = 0.5
 loop = true
@@ -105,7 +103,6 @@ text = "EXIT"
 flat = true
 
 [node name="SelectionArrow" type="Control" parent="Panel"]
-editor/display_folded = true
 
 [node name="TextureRect" type="TextureRect" parent="Panel/SelectionArrow"]
 margin_left = -90.4984
@@ -119,7 +116,6 @@ autoplay = "wiggle"
 anims/wiggle = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
-
 [connection signal="pressed" from="Panel/VBoxContainer/Options/TryAgain" to="." method="_on_TryAgain_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Options/Load" to="." method="_on_Load_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Options/Exit" to="." method="_on_Exit_pressed"]
