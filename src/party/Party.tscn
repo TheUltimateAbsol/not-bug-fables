@@ -1,18 +1,15 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/party/Party.gd" type="Script" id=1]
 [ext_resource path="res://src/party/PartyMember.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/combat/battlers/jobs/GodetteJob.tres" type="Resource" id=3]
 [ext_resource path="res://assets/sprites/battlers/godette_portrait_256.png" type="Texture" id=4]
 [ext_resource path="res://src/combat/animation/GodetteAnim.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/combat/battlers/skills/LearnedSkill.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/combat/battlers/skills/Lollislash.tres" type="Resource" id=7]
 [ext_resource path="res://src/combat/battlers/ai/PlayerInput.gd" type="Script" id=8]
 [ext_resource path="res://src/map/pawns/GodettePawnAnim.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/combat/battlers/jobs/RobiJob.tres" type="Resource" id=10]
 [ext_resource path="res://assets/sprites/battlers/robi_portrait_256.png" type="Texture" id=11]
 [ext_resource path="res://src/combat/animation/RobiAnim.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/combat/battlers/skills/Slash.tres" type="Resource" id=13]
 [ext_resource path="res://src/map/pawns/RobiPawnAnim.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/combat/battlers/actions/Shoot.gd" type="Script" id=15]
 [ext_resource path="res://src/combat/battlers/actions/Attack.tscn" type="PackedScene" id=17]
@@ -34,9 +31,7 @@ battler_node = NodePath("../..")
 
 [node name="Slice" parent="Godette/Battler/Actions" index="0" instance=ExtResource( 17 )]
 script = ExtResource( 18 )
-
-[node name="LolliSlash" parent="Godette/Battler/Skills" index="0" instance=ExtResource( 6 )]
-skill = ExtResource( 7 )
+action_name = "Slice"
 
 [node name="AI" parent="Godette/Battler" index="6"]
 script = ExtResource( 8 )
@@ -56,9 +51,7 @@ battler_node = NodePath("../..")
 
 [node name="Shoot" parent="Robi/Battler/Actions" index="0" instance=ExtResource( 17 )]
 script = ExtResource( 15 )
-
-[node name="Slash" parent="Robi/Battler/Skills" index="0" instance=ExtResource( 6 )]
-skill = ExtResource( 13 )
+action_name = "Shoot"
 
 [node name="AI" parent="Robi/Battler" index="6"]
 script = ExtResource( 8 )

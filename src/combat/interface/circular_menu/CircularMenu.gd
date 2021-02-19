@@ -4,12 +4,15 @@ signal action_selected(action)
 
 onready var tween := $Tween as Tween
 onready var labels := $"Flower Select".get_children()
-var current_position = 0
+var current_position:int = 0
+var active:bool = true
+var actor:Battler
 
 enum Directions { LEFT = -1, RIGHT = 1 }
 enum Layout { CENTERED = 0, CLOCKWISE = 1, COUNTER_CLOCKWISE = -1 }
 
 const CircularButton := preload("CircularButton.tscn")
+const ActionMenu := preload("res://src/combat/interface/circular_menu/ActionMenu.tscn")
 const Whoosh := preload("res://src/ActionCommand/194081__potentjello__woosh-noise-1.wav")
 
 export (Layout) var layout: int = Layout.CENTERED
@@ -23,20 +26,13 @@ func _ready():
 	for label in labels:
 		label.modulate = Color.transparent
 	$"Flower Select/AttackLabel".modulate = Color.white
+	
+	active = true
 
 
 func initialize(actor: Battler) -> void:
-	# Creates a circular menu from a battler's actions
-#	var actions = actor.actions.get_actions()
-#	for action in actions:
-#		var button = CircularButton.instance()
-#		buttons.add_child(button)
-#		var target_position = _calculate_position(button, actions.size())
-#		button.initialize(action, target_position)
-#		button.connect("pressed", self, "_on_CircularButton_pressed", [action])
-	pass
+	self.actor = actor
 	
-
 func open() -> void:
 	# Plays the open animation on every circular button, with a short time offset
 	# Gives focus to the first button
@@ -91,14 +87,16 @@ func transition(old, new):
 
 
 func close() -> void:
-	AnimFunc.adjust_all_keys($MenuAnimator.get_animation("Introl"), ".:rect_rotation", $"Flower Select".rotation)
-	$MenuAnimator.play_backwards("Intro")
+	AnimFunc.adjust_all_keys($MenuAnimator.get_animation("Exit"), ".:rect_position:y", rect_position.y)
+	$MenuAnimator.play("Exit")
 	yield($MenuAnimator, "animation_finished")
 	queue_free()
 
 
 func cancel_animation() -> void:
+	#probably should add some code to make sure that previous text becomes invisible
 	tween.stop_all()
+	
 #	for button_index in buttons.get_child_count():
 #		var button = buttons.get_child(button_index)
 #		button.rect_scale = button.unfocused_scale
@@ -106,13 +104,29 @@ func cancel_animation() -> void:
 #	var first_button = buttons.get_child(0)
 #	first_button.grab_focus()
 
+func open_menu():
+	var new_menu = ActionMenu.instance()
+	$ActionMenu.add_child(new_menu)
+	new_menu.initialize(actor)
+	new_menu.connect("action_selected", self, "_on_ActionMenu_Selection")
+	$ConfirmSound.pitch_scale = 1.5
+	$ConfirmSound.play()
+	active = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not active: return
+	
 	var direction := 0
 	if event.is_action_pressed("ui_right") or event.is_action_pressed("ui_focus_next"):
 		direction = Directions.RIGHT
 	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_focus_prev"):
 		direction = Directions.LEFT
+	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_focus_prev"):
+		direction = Directions.LEFT
+	if event.is_action_pressed("ui_accept"):
+		accept_event()
+		open_menu()
+		return
 
 	if not direction in [Directions.LEFT, Directions.RIGHT]:
 		return
@@ -125,9 +139,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	transition(current_position, next_index)
 #
 #
-#func _on_CircularButton_pressed(action):
+func _on_ActionMenu_Selection(action):
+	if (action == null):
+		active = true
+		return
 #	yield(close(), "completed")
-#	emit_signal("action_selected", action)
+	$ConfirmSound.pitch_scale = 3
+	$ConfirmSound.play()
+	close()
+	emit_signal("action_selected", action)
 #
 #
 #func _update() -> void:

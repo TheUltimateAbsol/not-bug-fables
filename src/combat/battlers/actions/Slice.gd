@@ -1,6 +1,5 @@
 extends CombatAction
 
-
 func execute(targets):
 	assert(initialized)
 	assert(actor.party_member)
