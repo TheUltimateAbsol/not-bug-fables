@@ -13,22 +13,27 @@ signal action_selected(action)
 
 var update_selection:bool = false
 var target_button
+var disable_input = false
+var fresh = true
 
 func update_selection_arrow():
 	selection_arrow.set_global_position(Vector2(selection_arrow.rect_global_position.x, target_button.rect_global_position.y))
 	selection_arrow.get_node("AnimationPlayer").play("Animate")
 	update_selection = false
+	if fresh:
+		fresh = false
+	else:
+		$ScrollSound.play()
 
 #update scrollbar
 #update arrow positions
 func _process(delta):
 	#scrollbar update
-	print(scroll_box.scroll_vertical, ", ", scroll_box.get_v_scrollbar().max_value)
 	up_arrow.show()
 	down_arrow.show()
 	if scroll_box.scroll_vertical == 0:
 		up_arrow.hide()
-	if scroll_box.scroll_vertical == scroll_box.get_v_scrollbar().max_value - scroll_box.rect_size.y:
+	if scroll_box.scroll_vertical >= scroll_box.get_v_scrollbar().max_value - scroll_box.rect_size.y:
 		down_arrow.hide()
 	#arrow position update
 	if update_selection:
@@ -45,10 +50,12 @@ func initialize(actor: Battler) -> void:
 	action_list.get_child(0).grab_focus()
 	
 func close() -> void:
-	queue_free()
+	call_deferred("queue_free")
 	
 func _on_ActionButton_pressed(action):
-	yield(close(), "completed")
+	disable_input = true
+	close()
+	#yield(close(), "completed")
 	emit_signal("action_selected", action)
 	
 func _on_ActionButton_focus(button:Button):
@@ -57,6 +64,8 @@ func _on_ActionButton_focus(button:Button):
 	target_button = button
 
 func _unhandled_input(event: InputEvent) -> void:
+	if disable_input: return
+	#If this isn't completely gone before the enemy selection, it will cause an error
 	var in_focus: Button = get_focus_owner()
 	
 	var direction := 0
@@ -64,6 +73,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		direction = Directions.DOWN
 	if event.is_action_pressed("ui_down") or event.is_action_pressed("ui_focus_prev"):
 		direction = Directions.UP
+	if event.is_action_pressed("ui_cancel"):
+		close()
+		emit_signal("action_selected", null)
+		return
 
 	if not direction in [Directions.DOWN, Directions.UP]:
 		return

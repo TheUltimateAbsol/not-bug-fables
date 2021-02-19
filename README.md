@@ -7,3 +7,5 @@ Chomp sound: https://freesound.org/people/Z_er0/sounds/413044/
 Game Time font: https://www.dafont.com/game-time.font
 Particles: https://www.kenney.nl/assets/particle-pack
 Woosh sound: https://freesound.org/people/potentjello/sounds/194081/
+UI scroll sound: https://freesound.org/people/newlocknew/sounds/515829/
+UI confirm sound: https://freesound.org/people/newlocknew/sounds/515830/

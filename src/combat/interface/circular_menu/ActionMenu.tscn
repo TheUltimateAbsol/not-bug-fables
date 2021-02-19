@@ -1,9 +1,20 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/fonts/Game_Time.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/ui/Selection ARrow.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/ui/topbottom.png" type="Texture" id=3]
+[ext_resource path="res://src/ActionCommand/515829__newlocknew__ui-2-1-ntfo-triangle-sytrus-arpegio-multiprocessing-rsmpl.wav" type="AudioStream" id=4]
 [ext_resource path="res://src/combat/interface/circular_menu/ActionMenu.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -16,11 +27,11 @@ VScrollBar/icons/decrement = null
 VScrollBar/icons/decrement_highlight = null
 VScrollBar/icons/increment = null
 VScrollBar/icons/increment_highlight = null
-VScrollBar/styles/grabber = null
-VScrollBar/styles/grabber_highlight = null
-VScrollBar/styles/grabber_pressed = null
-VScrollBar/styles/scroll = null
-VScrollBar/styles/scroll_focus = null
+VScrollBar/styles/grabber = SubResource( 12 )
+VScrollBar/styles/grabber_highlight = SubResource( 13 )
+VScrollBar/styles/grabber_pressed = SubResource( 14 )
+VScrollBar/styles/scroll = SubResource( 15 )
+VScrollBar/styles/scroll_focus = SubResource( 16 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.294118, 0.521569, 0.2, 1 )
@@ -222,3 +233,7 @@ texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ScrollSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+pitch_scale = 3.0

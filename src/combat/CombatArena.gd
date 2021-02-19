@@ -90,7 +90,8 @@ func battle_end():
 	else:
 		emit_signal("game_over")
 
-
+#ahaha, isn't this going to create a stack overflow...?
+#maybe this should be a concern....
 func play_turn():
 	var battler: Battler = get_active_battler()
 	var targets: Array
