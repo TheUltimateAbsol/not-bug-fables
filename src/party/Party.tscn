@@ -34,6 +34,23 @@ battler_node = NodePath("../..")
 
 [node name="Slice" parent="Godette/Battler/Actions" index="0" instance=ExtResource( 17 )]
 script = ExtResource( 18 )
+action_name = "1"
+
+[node name="Slice2" parent="Godette/Battler/Actions" index="1" instance=ExtResource( 17 )]
+script = ExtResource( 18 )
+action_name = "2"
+
+[node name="Slice3" parent="Godette/Battler/Actions" index="2" instance=ExtResource( 17 )]
+script = ExtResource( 18 )
+action_name = "3"
+
+[node name="Slice4" parent="Godette/Battler/Actions" index="3" instance=ExtResource( 17 )]
+script = ExtResource( 18 )
+action_name = "4"
+
+[node name="Slice5" parent="Godette/Battler/Actions" index="4" instance=ExtResource( 17 )]
+script = ExtResource( 18 )
+action_name = "5"
 
 [node name="LolliSlash" parent="Godette/Battler/Skills" index="0" instance=ExtResource( 6 )]
 skill = ExtResource( 7 )
@@ -56,6 +73,7 @@ battler_node = NodePath("../..")
 
 [node name="Shoot" parent="Robi/Battler/Actions" index="0" instance=ExtResource( 17 )]
 script = ExtResource( 15 )
+action_name = "Shoot"
 
 [node name="Slash" parent="Robi/Battler/Skills" index="0" instance=ExtResource( 6 )]
 skill = ExtResource( 13 )
