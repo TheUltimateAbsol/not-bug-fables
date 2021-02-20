@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/combat/interface/bars/StatBarNumeric.gd" type="Script" id=1]
+
+[node name="StatBarNumeric" type="HBoxContainer"]
+margin_right = 61.0
+margin_bottom = 14.0
+alignment = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="."]
+margin_right = 24.0
+margin_bottom = 14.0
+text = "120"
+
+[node name="Separator" type="Label" parent="."]
+margin_left = 28.0
+margin_right = 33.0
+margin_bottom = 14.0
+text = "/"
+
+[node name="Max" type="Label" parent="."]
+margin_left = 37.0
+margin_right = 61.0
+margin_bottom = 14.0
+text = "120"

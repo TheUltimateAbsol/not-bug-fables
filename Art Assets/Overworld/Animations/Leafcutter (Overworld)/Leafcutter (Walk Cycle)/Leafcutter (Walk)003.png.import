@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Leafcutter (Walk)003.png-4b6f5c65ea2d5c90c7352aad48ebb470.stex"
+path="res://.import/Leafcutter (Walk)003.png-4867aff5ebbc5177a91adba8a5252fb5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art Assets/Playable Characters/Leafcutter Ant/Leafcutter (Overworld)/Leafcutter (Walk Cycle)/Leafcutter (Walk)003.png"
-dest_files=[ "res://.import/Leafcutter (Walk)003.png-4b6f5c65ea2d5c90c7352aad48ebb470.stex" ]
+source_file="res://Art Assets/Overworld/Animations/Leafcutter (Overworld)/Leafcutter (Walk Cycle)/Leafcutter (Walk)003.png"
+dest_files=[ "res://.import/Leafcutter (Walk)003.png-4867aff5ebbc5177a91adba8a5252fb5.stex" ]
 
 [params]
 

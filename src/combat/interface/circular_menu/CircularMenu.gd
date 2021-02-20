@@ -64,10 +64,8 @@ func transition(old, new):
 	)
 	var old_angle = $"Flower Select".rotation
 	if (old == labels.size()-1 && new == 0):
-		print("over")
 		old_angle = old*PI/2 - 2*PI
 	if (new == labels.size()-1 && old == 0):
-		print("under")
 		old_angle = old*PI/2 + 2*PI
 		
 	tween.interpolate_property(
@@ -79,7 +77,6 @@ func transition(old, new):
 		Tween.TRANS_QUART,
 		Tween.EASE_OUT
 	)
-	print(old, new)
 	current_position = new
 	tween.start()
 	$AudioStreamPlayer.stream = Whoosh

@@ -23,6 +23,7 @@ pawn_anim_path = NodePath("GodettePawnAnim")
 growth = ExtResource( 3 )
 
 [node name="Battler" parent="Godette" index="0"]
+display_name = "Leafcutter"
 party_member = true
 turn_order_icon = ExtResource( 4 )
 
@@ -43,6 +44,7 @@ pawn_anim_path = NodePath("RobiPawnAnim")
 growth = ExtResource( 10 )
 
 [node name="Battler" parent="Robi" index="0"]
+display_name = "Ghost"
 party_member = true
 turn_order_icon = ExtResource( 11 )
 

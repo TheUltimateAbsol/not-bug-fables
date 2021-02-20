@@ -10,6 +10,7 @@ signal died(battler)
 export var TARGET_OFFSET_DISTANCE: float = 120.0
 
 export var stats: Resource
+export var display_name: String
 onready var drops := $Drops
 onready var skin = $Skin
 onready var actions = $Actions
@@ -21,7 +22,6 @@ var target_global_position: Vector2
 
 var selected: bool = false setget set_selected
 var selectable: bool = false setget set_selectable
-var display_name: String
 
 export var party_member = false
 export var turn_order_icon: Texture

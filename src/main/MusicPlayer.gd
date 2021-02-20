@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 
-const battle_theme = preload("res://assets/audio/bgm/battle_theme.ogg")
+const battle_theme = preload("res://assets/audio/bgm/game_maoudamashii_1_battle37.ogg")
 const victory_fanfare = preload("res://assets/audio/bgm/victory_fanfare.ogg")
 
 

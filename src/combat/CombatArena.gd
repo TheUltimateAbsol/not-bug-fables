@@ -38,6 +38,7 @@ func initialize(formation: Formation, party: Array):
 
 func battle_start():
 	yield(play_intro(), "completed")
+	interface.play_intro()
 	active = true
 	play_turn()
 
@@ -79,6 +80,7 @@ func ready_field(formation: Formation, party_members: Array):
 
 func battle_end():
 	emit_signal("battle_ends")
+	interface.play_exit()
 	active = false
 	var active_battler = get_active_battler()
 	active_battler.selected = false

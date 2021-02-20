@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/combat/CombatArena.gd" type="Script" id=1]
 [ext_resource path="res://src/combat/turn_queue/TurnQueue.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/combat/Rewards.gd" type="Script" id=8]
 [ext_resource path="res://assets/theme/default.theme" type="Theme" id=9]
 [ext_resource path="res://src/combat/background/Grasslands.tscn" type="PackedScene" id=10]
+[ext_resource path="res://src/combat/interface/stat_menu/StatMenu.tscn" type="PackedScene" id=11]
 
 [node name="CombatArena" type="Node2D"]
 script = ExtResource( 1 )
@@ -43,6 +44,8 @@ MOVE_DURATION = 0.1
 
 [node name="TurnOrder" parent="CombatInterface" instance=ExtResource( 7 )]
 
+[node name="Stats" parent="CombatInterface" instance=ExtResource( 11 )]
+
 [node name="Rewards" type="CanvasLayer" parent="."]
 script = ExtResource( 8 )
 
@@ -58,5 +61,9 @@ anchor_bottom = 1.0
 text = "EXP Earned"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Grasslands" parent="." instance=ExtResource( 10 )]
+position = Vector2( -0.943909, 0 )

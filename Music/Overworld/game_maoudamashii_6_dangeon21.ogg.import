@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/game_maoudamashii_6_dangeon21.ogg-0bdc9bb4dfe2e46dd12204eac98a988a.oggstr"
+
+[deps]
+
+source_file="res://Music/Overworld/game_maoudamashii_6_dangeon21.ogg"
+dest_files=[ "res://.import/game_maoudamashii_6_dangeon21.ogg-0bdc9bb4dfe2e46dd12204eac98a988a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
