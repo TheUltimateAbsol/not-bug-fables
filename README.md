@@ -11,3 +11,10 @@
 - UI confirm sound: https://freesound.org/people/newlocknew/sounds/515830/
 - PointFree font: https://www.dafont.com/pointfree.font
 - Scrape sound: https://freesound.org/people/Ayliffe/sounds/80096/
+
+
+## Layers
+- 1: Physics
+- 2: Player
+- 3: Enemies
+- 4: Player Attacks

@@ -79,6 +79,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/combat/battlers/Drops.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "EnemyPawn",
+"language": "GDScript",
+"path": "res://src/map/pawns/EnemyPawn.gd"
+}, {
+"base": "PawnAnim",
+"class": "EnemyPawnAnim",
+"language": "GDScript",
+"path": "res://src/map/pawns/EnemyPawnAnim.gd"
+}, {
 "base": "Item",
 "class": "Equipment",
 "language": "GDScript",
@@ -194,7 +204,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/map/pawns/PawnInteractive.gd"
 }, {
-"base": "PawnActor",
+"base": "KinematicBody2D",
 "class": "PawnLeader",
 "language": "GDScript",
 "path": "res://src/map/pawns/PawnLeader.gd"
@@ -284,6 +294,8 @@ _global_script_class_icons={
 "DialogueBox": "",
 "DialoguePlayer": "",
 "Drops": "",
+"EnemyPawn": "",
+"EnemyPawnAnim": "",
 "Equipment": "",
 "Formation": "",
 "GUI": "",

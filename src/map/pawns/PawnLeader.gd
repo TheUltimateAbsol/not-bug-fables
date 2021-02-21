@@ -1,54 +1,53 @@
 # Player-controlled pawn.
 # Set to Stop during pause
-extends PawnActor
+extends KinematicBody2D
+#
 class_name PawnLeader
 
-onready var destination_point := $DestinationPoint
+const RUN_SPEED = 10.0
 
 var _path_current := PoolVector3Array()
 var _direction := Vector2()
+var game_board
+onready var pivot = $Pivot
+onready var anim: PawnAnim = pivot.get_node("PawnAnim")
+signal moved(last_position, current_position)
 
-
-func _ready() -> void:
-	destination_point.set_as_toplevel(true)
-	destination_point.hide()
-
+func initialize(board):
+	game_board = board
 
 func _process(delta: float) -> void:
-	if _path_current.size() > 0:
-		var next_point := Vector2(_path_current[0].x, _path_current[0].y)
-		_direction = next_point - game_board.world_to_map(global_position)
-		_path_current.remove(0)
-
 	if _direction != Vector2():
-		update_look_direction(_direction)
-		var target_position: Vector2 = game_board.request_move(self, _direction)
-		if target_position:
-			move_to(target_position)
-		else:
-			bump()
+		anim.walk(_direction)
+		move_and_collide(_direction*RUN_SPEED)
+	else:
+		anim.stand()
 
-	if _path_current.size() == 0:
-		destination_point.hide()
-		_direction = Vector2()
-
-
-func get_key_input_direction(event: InputEventKey) -> Vector2:
-	return Vector2(
-		int(event.is_action_pressed("ui_right")) - int(event.is_action_pressed("ui_left")),
-		int(event.is_action_pressed("ui_down")) - int(event.is_action_pressed("ui_up"))
+#Gets current key state direction
+#TODO: Add axises to here as well
+func get_key_input_direction() -> Vector2:
+	var dir = Vector2(
+		int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")),
+		int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	)
+	return dir.normalized()
 
+func attack():
+	set_process(false)
+	yield(anim.attack(), "completed")
+	set_process(true)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		_direction = get_key_input_direction(event)
-	elif (
-		event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed
-		or event is InputEventScreenTouch and event.pressed
-	):
-		_path_current = game_board.find_path(global_position, get_global_mouse_position())
-		if _path_current.size() > 0:
-			var pos := _path_current[_path_current.size() - 1]
-			destination_point.position = game_board.map_to_world(Vector2(pos.x, pos.y))
-			destination_point.show()
+	#We don't care about echos because they provide no new data
+	if event is InputEventKey and not event.is_echo():
+		_direction = get_key_input_direction()
+		if event.is_action_pressed("ui_accept"):
+			attack()
+
+
+func change_skin(pawn_anim: PawnAnim):
+	# Replaces the pawn's animated character with another
+	if anim:
+		anim.queue_free()
+	anim = pawn_anim
+	pivot.add_child(pawn_anim)

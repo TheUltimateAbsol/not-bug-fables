@@ -18,14 +18,15 @@ func _ready():
 func initialize(board):
 	game_board = board
 
-
+#what? this doesn't seem to exist yet
+#TODO: Make this work
 func update_look_direction(direction):
 	return
 
 
 func move_to(target_position):
 	emit_signal("moved", position, target_position)
-	set_process(false)
+	#set_process(false)
 
 	# Move the node to the target cell instantly,
 	# and animate the sprite moving from the start to the target cell
@@ -42,8 +43,8 @@ func move_to(target_position):
 		Tween.EASE_IN
 	)
 	tween.start()
-	yield(anim.play_walk(), "completed")
-	set_process(true)
+	#yield(anim.play_walk(), "completed")
+	#set_process(true)
 
 
 func bump():

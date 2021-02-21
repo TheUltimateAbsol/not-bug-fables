@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/map/Map.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Dirt Level/Dirt Room 1/Dirt (Room 1) Base.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Props/3 Pebbles.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Props/Leaf Bridge.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Props/Item.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Props/Large Stick.png" type="Texture" id=6]
+
+[node name="Node2D" instance=ExtResource( 1 )]
+cell_y_sort = true
+
+[node name="Dirt (Room 1) Base" type="Sprite" parent="." index="0"]
+visible = false
+position = Vector2( 1398.73, 789.357 )
+texture = ExtResource( 2 )
+
+[node name="3 Pebbles" type="Sprite" parent="." index="1"]
+position = Vector2( 2234.31, 342.432 )
+texture = ExtResource( 3 )
+
+[node name="Item" type="Sprite" parent="." index="2"]
+position = Vector2( 1115.34, 1447.15 )
+texture = ExtResource( 5 )
+
+[node name="Large Stick" type="Sprite" parent="." index="3"]
+visible = false
+position = Vector2( 1143.85, 1051.25 )
+texture = ExtResource( 6 )
+offset = Vector2( 0, -300 )
+
+[node name="Large Stick2" type="Sprite" parent="." index="4"]
+position = Vector2( 1143.85, 394.508 )
+texture = ExtResource( 6 )
+offset = Vector2( 0, 350 )
+
+[node name="Leaf Bridge" type="Sprite" parent="." index="5"]
+position = Vector2( 1344.34, 871.284 )
+texture = ExtResource( 4 )
+
+[node name="Polygon2D" type="Polygon2D" parent="." index="6"]
+position = Vector2( 584.663, 1111.48 )
+offset = Vector2( 150, -900 )
+texture = ExtResource( 6 )
+polygon = PoolVector2Array( 104.701, 940.872, 587.913, 185.353, 854.881, 190.692, 860.221, -4.19464, 360.991, -6.86432, -162.267, 951.551 )
+uv = PoolVector2Array( 74.7017, 930.872, 557.914, 175.353, 824.882, 180.692, 830.221, -14.1947, 330.991, -16.8643, -192.266, 941.551 )

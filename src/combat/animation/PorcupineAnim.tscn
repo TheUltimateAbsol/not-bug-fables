@@ -1,59 +1,13 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/combat/animation/BattlerAnim.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/battlers/Teek (Loop)/Teek_002.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/battlers/TeekAnim.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://src/ActionCommand/AttackPlayer.gd" type="Script" id=4]
-[ext_resource path="res://assets/sprites/battlers/Teek (Loop)/Teek_001.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)011.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)006.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)007.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)005.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)012.png" type="Texture" id=10]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)000.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)015.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)002.png" type="Texture" id=13]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)003.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)004.png" type="Texture" id=15]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)013.png" type="Texture" id=16]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)008.png" type="Texture" id=17]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)016.png" type="Texture" id=18]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)014.png" type="Texture" id=19]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)010.png" type="Texture" id=20]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)001.png" type="Texture" id=21]
-[ext_resource path="res://assets/sprites/battlers/Teek (Attack)/Teek (Attack)009.png" type="Texture" id=22]
 [ext_resource path="res://src/ActionCommand/411494__inspectorj__jew-s-harp-single-a-h1.wav" type="AudioStream" id=23]
 [ext_resource path="res://src/ActionCommand/413044__z-er0__serpent-chomp-s.wav" type="AudioStream" id=24]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 17 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 16 ), ExtResource( 19 ), ExtResource( 12 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "attack",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "walk",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 17 ), ExtResource( 22 ) ],
-"loop": false,
-"name": "lunge",
-"speed": 12.0
-} ]
-
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Chomp_Approach"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -108,7 +62,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2 )
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Chomp_Attack"
 length = 1.083
 step = 0.083
@@ -178,7 +132,7 @@ tracks/4/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Chomp_Reset"
 step = 0.083
 tracks/0/type = "value"
@@ -244,7 +198,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -295,7 +249,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.6
 step = 0.05
 tracks/0/type = "value"
@@ -362,7 +316,7 @@ tracks/4/keys = {
 "values": [ "lunge" ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -414,7 +368,7 @@ tracks/3/keys = {
 "values": [ "walk", "idle" ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "Ram_Windup"
 length = 0.4
 step = 0.05
@@ -443,7 +397,7 @@ tracks/1/keys = {
 "values": [ "default", "idle", "default" ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -505,7 +459,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "Chomp"
 length = 4.0
 tracks/0/type = "animation"
@@ -519,7 +473,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2.1 )
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 3.0
 tracks/0/type = "animation"
 tracks/0/path = NodePath("AttackPlayer")
@@ -542,9 +496,8 @@ texture = ExtResource( 2 )
 [node name="body" type="AnimatedSprite" parent="." index="1"]
 position = Vector2( 2.75671, -60.6274 )
 scale = Vector2( 0.405271, 0.405271 )
-frames = SubResource( 1 )
-animation = "idle"
-frame = 1
+frames = ExtResource( 3 )
+animation = "walk"
 playing = true
 offset = Vector2( -40, -30 )
 
@@ -554,19 +507,19 @@ size = Vector2( 230, 152.667 )
 offset = Vector2( 10, 0 )
 
 [node name="AttackPlayer" type="AnimationPlayer" parent="." index="4"]
-anims/Chomp_Approach = SubResource( 2 )
-anims/Chomp_Attack = SubResource( 3 )
-anims/Chomp_Reset = SubResource( 4 )
-anims/Ram_Approach = SubResource( 5 )
-anims/Ram_Lunge = SubResource( 6 )
-anims/Ram_Reset = SubResource( 7 )
-anims/Ram_Windup = SubResource( 8 )
-anims/Reset = SubResource( 9 )
+anims/Chomp_Approach = SubResource( 1 )
+anims/Chomp_Attack = SubResource( 2 )
+anims/Chomp_Reset = SubResource( 3 )
+anims/Ram_Approach = SubResource( 4 )
+anims/Ram_Lunge = SubResource( 5 )
+anims/Ram_Reset = SubResource( 6 )
+anims/Ram_Windup = SubResource( 7 )
+anims/Reset = SubResource( 8 )
 script = ExtResource( 4 )
 
 [node name="Test" type="AnimationPlayer" parent="." index="5"]
-anims/Chomp = SubResource( 10 )
-anims/Ram = SubResource( 11 )
+anims/Chomp = SubResource( 9 )
+anims/Ram = SubResource( 10 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6"]
-stream = ExtResource( 24 )
+stream = ExtResource( 23 )

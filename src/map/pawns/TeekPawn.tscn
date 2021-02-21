@@ -1,0 +1,178 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/map/pawns/EnemyPawn.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/battlers/TeekAnim.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/ActionCommand/411494__inspectorj__jew-s-harp-single-a-h1.wav" type="AudioStream" id=3]
+[ext_resource path="res://src/map/pawns/EnemyPawnAnim.gd" type="Script" id=4]
+[ext_resource path="res://src/combat/battlers/formations/PorcupineFormation001.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=6]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 27.3152
+height = 38.1507
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 0.01
+
+[sub_resource type="Animation" id=3]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 0.5, 2, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -30 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Root/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Root/AnimatedSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Root/AnimatedSprite:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Approach"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walk" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Root/AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Root/AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 61.0536
+
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"map_enemy",
+]]
+collision_layer = 5
+script = ExtResource( 1 )
+formation = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -25.2695 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="AgroArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AgroArea"]
+shape = SubResource( 1 )
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="PawnAnim" type="Position2D" parent="Pivot"]
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/PawnAnim"]
+anims/Alert = SubResource( 3 )
+anims/Approach = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+
+[node name="shadow" type="Sprite" parent="Pivot/PawnAnim"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="Root" type="Position2D" parent="Pivot/PawnAnim"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Pivot/PawnAnim/Root"]
+position = Vector2( -10.3181, -46.0346 )
+scale = Vector2( 0.3, 0.3 )
+frames = ExtResource( 2 )
+animation = "idle"
+playing = true
+
+[node name="Hitbox" type="Area2D" parent="Pivot/PawnAnim/Root"]
+position = Vector2( -10.1021, -39.8474 )
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/PawnAnim/Root/Hitbox"]
+shape = SubResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Pivot/PawnAnim/Root"]
+stream = ExtResource( 3 )
+[connection signal="area_entered" from="Pivot/PawnAnim/Root/Hitbox" to="Pivot/PawnAnim" method="_on_area_entered"]

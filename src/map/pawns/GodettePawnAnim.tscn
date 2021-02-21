@@ -1,11 +1,188 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/map/pawns/PawnAnim.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/sprites/local_map/characters/godette_pawn.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Walk Cycle)/Leafcutter (Walk)003.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Walk Cycle)/Leafcutter (Walk)002.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Walk Cycle)/Leafcutter (Walk)000.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)006.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)007.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)000.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)002.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Walk Cycle)/Leafcutter (Walk)001.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)001.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)005.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)004.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)003.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=14]
+
+[sub_resource type="Animation" id=6]
+resource_name = "Attack"
+length = 0.51
+step = 0.083
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "attack" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Root/AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Root/AnimatedSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.083, 0.166, 0.249, 0.332, 0.415 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Root/SwordHitbox:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.249, 0.498 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Root/SwordHitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.249, 0.498 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "default" ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Walk"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walk" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Root/AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 13 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "attack",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 12.0
+} ]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 125.0
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 100.0
 
 [node name="GodettePawnAnim" instance=ExtResource( 1 )]
 
-[node name="Body" parent="Root" index="0"]
-scale = Vector2( 1, 1 )
-texture = ExtResource( 2 )
-offset = Vector2( 0, -179.527 )
+[node name="CharacterAnimation" type="AnimationPlayer" parent="." index="1"]
+anims/Attack = SubResource( 6 )
+anims/Idle = SubResource( 5 )
+anims/Walk = SubResource( 4 )
+
+[node name="shadow" type="Sprite" parent="." index="2"]
+texture = ExtResource( 14 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Root" index="0"]
+position = Vector2( 0, -10 )
+frames = SubResource( 1 )
+animation = "attack"
+frame = 6
+offset = Vector2( 40, -110 )
+
+[node name="SwordHitbox" type="Area2D" parent="Root" index="1" groups=[
+"player_attack",
+]]
+position = Vector2( 198.008, -120.835 )
+monitorable = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Root/SwordHitbox" index="0"]
+shape = SubResource( 7 )
+disabled = true
+
+[node name="Hitbox" type="Area2D" parent="Root" index="2" groups=[
+"player_hitbox",
+]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Root/Hitbox" index="0"]
+position = Vector2( 0, -83.6789 )
+shape = SubResource( 8 )
+disabled = true

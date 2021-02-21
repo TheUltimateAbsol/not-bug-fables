@@ -13,13 +13,15 @@ onready var grid = $GameBoard
 
 func _ready() -> void:
 	assert(dialogue_box)
+	#heh, I wonder if this is going to activate actions that shouldn't be active?
 	for action in get_tree().get_nodes_in_group("map_action"):
 		(action as MapAction).initialize(self)
+	for enemy in get_tree().get_nodes_in_group("map_enemy"):
+		(enemy as EnemyPawn).initialize_action(self)
 
 
 func spawn_party(party) -> void:
 	grid.pawns.spawn_party(grid, party)
-
 
 func start_encounter(formation) -> void:
 	emit_signal("enemies_encountered", formation.instance())
