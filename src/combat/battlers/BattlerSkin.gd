@@ -4,13 +4,13 @@ export var TURN_START_MOVE_DISTANCE: float = 40.0
 export var TWEEN_DURATION: float = 0.3
 
 onready var tween = $Tween
-onready var anim = $AnimationPlayer
+onready var anim:AnimationPlayer = $AnimationPlayer
 var battler_anim: BattlerAnim
 onready var position_start: Vector2
 
 var blink: bool = false setget set_blink
 
-
+#NO
 func _ready():
 	hide()
 
@@ -75,8 +75,11 @@ func play_death():
 	yield(battler_anim.play_death(), "completed")
 
 
-func appear():
+func appear(skip=false):
 	anim.play("appear")
+	if skip:
+		anim.seek(anim.current_animation_length)
+		show()
 
 
 func get_extents() -> RectExtents:

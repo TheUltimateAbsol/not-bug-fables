@@ -5,8 +5,8 @@ class_name Game #maybe we should save this for something else?
 
 signal combat_started
 
-enum BATTLE_OPENING_TYPES {STANDARD, PLAYER_HIT, ENEMY_HIT}
 const combat_arena_scene = preload("res://src/combat/CombatArena.tscn")
+const hit_effect_scene = preload("res://src/map/HitEffect.tscn")
 onready var transition = $Overlays/TransitionColor
 onready var local_map = $LocalMap
 onready var party = $Party as Party
@@ -25,9 +25,21 @@ func _ready():
 	local_map.visible = true
 	local_map.connect("enemies_encountered", self, "enter_battle")
 
+#This might break that cool thing we did to make sure attacks end nicely...
+func freeze_node(node, freeze):
+	node.set_process(!freeze)
+	node.set_physics_process(!freeze)
+	node.set_process_input(!freeze)
+	node.set_process_internal(!freeze)
+	node.set_process_unhandled_input(!freeze)
+	node.set_process_unhandled_key_input(!freeze)
+
+func freeze_scene(node, freeze):
+	freeze_node(node, freeze)
+	for c in node.get_children():
+		freeze_scene(c, freeze)
 
 func enter_battle(formation: Formation, start_type, enemy:EnemyPawn):
-	print(start_type)
 	# Plays the combat transition animation and initializes the combat scene
 	# not sure what this line here is for. Looks like someone's crappy patch!
 	if transitioning:
@@ -39,6 +51,15 @@ func enter_battle(formation: Formation, start_type, enemy:EnemyPawn):
 	music_player.play_battle_theme()
 
 	transitioning = true
+	freeze_scene(local_map, true)
+	
+	if start_type == Globals.BATTLE_OPENING_TYPES.PLAYER_HIT:
+		var hit = hit_effect_scene.instance()
+		add_child(hit)
+		hit.global_position = enemy.global_position
+		yield(hit, "finished")
+		hit.queue_free()
+	
 	yield(transition.fade_to_color(), "completed")
 
 	remove_child(local_map)
@@ -51,11 +72,14 @@ func enter_battle(formation: Formation, start_type, enemy:EnemyPawn):
 	)
 	combat_arena.initialize(formation, party.get_active_members())
 
+	if start_type == Globals.BATTLE_OPENING_TYPES.PLAYER_HIT:
+		combat_arena.battle_pre_start()
 	yield(transition.fade_from_color(), "completed")
 	transitioning = false
 
-	combat_arena.battle_start(start_type)
-	emit_signal("combat_started")
+	if start_type == Globals.BATTLE_OPENING_TYPES.STANDARD:
+		combat_arena.battle_start(start_type)
+	emit_signal("combat_started") #this line is used for quests ONLY and is very gay
 
 
 func _on_CombatArena_battle_completed(arena):
@@ -71,6 +95,7 @@ func _on_CombatArena_battle_completed(arena):
 	if engaged_enemy:
 		engaged_enemy.queue_free()
 
+	freeze_scene(local_map, false)
 	add_child(local_map)
 	yield(transition.fade_from_color(), "completed")
 	transitioning = false

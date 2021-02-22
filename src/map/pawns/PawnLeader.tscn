@@ -5,14 +5,14 @@
 [ext_resource path="res://src/map/DestinationPoint.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 35.0093, 22.0922 )
+extents = Vector2( 35.009, 10 )
 
 [node name="Body" type="KinematicBody2D"]
 collision_layer = 3
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -18.0109 )
+position = Vector2( 0, -10.5947 )
 shape = SubResource( 1 )
 
 [node name="Pivot" type="Position2D" parent="."]

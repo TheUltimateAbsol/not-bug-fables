@@ -13,11 +13,11 @@ onready var hitbox = $Root/Hitbox
 
 func _on_area_entered(area:Area2D):
 	if (area.is_in_group("player_attack")):
-		emit_signal("encountered", Game.BATTLE_OPENING_TYPES.PLAYER_HIT)
+		emit_signal("encountered", Globals.BATTLE_OPENING_TYPES.PLAYER_HIT)
 	elif (area.is_in_group("player_hitbox")):
 		#TODO
 		#Add custom code here to send ENEMY_HIT based on attack sequence
-		emit_signal("encountered", Game.BATTLE_OPENING_TYPES.STANDARD)
+		emit_signal("encountered", Globals.BATTLE_OPENING_TYPES.STANDARD)
 	
 func play_alert():
 	$AnimationPlayer.play("Alert")

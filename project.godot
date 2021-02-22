@@ -354,6 +354,7 @@ config/version="0.3.0"
 DialogueDatabase="*res://src/dialogue/DialogueDatabase.gd"
 QuestSystem="*res://src/quest/QuestSystem.tscn"
 AnimFunc="*res://src/ActionCommand/AnimFunc.gd"
+Globals="*res://src/Globals.gd"
 
 [debug]
 

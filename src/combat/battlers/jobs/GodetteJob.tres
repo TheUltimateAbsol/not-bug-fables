@@ -9,7 +9,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 210.0, 0, 1, Vector2( 1, 210 ), 210.0, 0.0, 1, 0
 
 [sub_resource type="Curve" id=2]
 max_value = 999.0
-_data = [ Vector2( 0, 68.7313 ), 0.0, 0.0, 0, 0, Vector2( 0.168959, 376.423 ), 1283.12, 1283.12, 0, 0, Vector2( 1, 999 ), -22.6083, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 10 ), 0.0, 0.0, 0, 0, Vector2( 0.638796, 445.009 ), 1283.12, 1283.12, 0, 0, Vector2( 1, 999 ), -22.6083, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=3]
 max_value = 80.0
@@ -22,8 +22,8 @@ _data = [ Vector2( 0, 3 ), 0.0, 0.0, 0, 0, Vector2( 0.992522, 145 ), 198.8, 0.0,
 
 [sub_resource type="Curve" id=5]
 min_value = 0.99
-max_value = 233.0
-_data = [ Vector2( 0, 8 ), 0.0, 803.058, 0, 0, Vector2( 0.251992, 114.45 ), -17.2645, 224.438, 0, 0, Vector2( 1, 233 ), 184.979, 0.0, 0, 0 ]
+max_value = 999.0
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.251992, 114.45 ), -17.2645, 224.438, 0, 0, Vector2( 1, 233 ), 184.979, 0.0, 0, 0 ]
 
 [resource]
 script = ExtResource( 1 )

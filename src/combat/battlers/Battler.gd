@@ -70,10 +70,10 @@ func _on_health_depleted():
 	emit_signal("died", self)
 
 
-func appear():
+func appear(skip=false):
 	var offset_direction = 1.0 if party_member else -1.0
 	skin.position.x += TARGET_OFFSET_DISTANCE * offset_direction
-	skin.appear()
+	skin.appear(skip)
 
 
 func has_point(point: Vector2):

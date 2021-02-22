@@ -4,13 +4,14 @@ extends KinematicBody2D
 #
 class_name PawnLeader
 
-const RUN_SPEED = 8.0
+const RUN_SPEED = 400.0
 
 var _path_current := PoolVector3Array()
 var _direction := Vector2()
 var game_board
 onready var pivot = $Pivot
 onready var anim: PawnAnim = pivot.get_node("PawnAnim")
+onready var camera: Camera2D = $Camera2D
 signal moved(last_position, current_position)
 
 func initialize(board):
@@ -19,7 +20,7 @@ func initialize(board):
 func _process(delta: float) -> void:
 	if _direction != Vector2():
 		anim.walk(_direction)
-		move_and_collide(_direction*RUN_SPEED)
+		move_and_slide(_direction*RUN_SPEED)
 	else:
 		anim.stand()
 

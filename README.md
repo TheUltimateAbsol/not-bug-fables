@@ -11,6 +11,7 @@
 - UI confirm sound: https://freesound.org/people/newlocknew/sounds/515830/
 - PointFree font: https://www.dafont.com/pointfree.font
 - Scrape sound: https://freesound.org/people/Ayliffe/sounds/80096/
+- Bottlecap sound: https://freesound.org/people/ftpalad/sounds/119900/
 
 
 ## Layers

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/map/LocalMap.gd" type="Script" id=1]
 [ext_resource path="res://assets/tilesets/grasslands.tres" type="TileSet" id=2]
@@ -15,6 +15,14 @@
 [ext_resource path="res://src/map/pawns/TestQuestReceiver.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/interface/gui/DialogueBox.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/map/pawns/TeekPawn.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Dirt Level/Dirt Room 1/Dirt (Room 1) Base.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Props/Leaf Bridge.png" type="Texture" id=17]
+[ext_resource path="res://src/map/Environment.gd" type="Script" id=18]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Props/3 Pebbles.png" type="Texture" id=19]
+[ext_resource path="res://Art Assets/Overworld/Dungeon Areas/Props/Large Stick_1.png" type="Texture" id=20]
+[ext_resource path="res://Art Assets/Overworld/Dungeon Areas/Props/Large Stick_2.png" type="Texture" id=21]
+[ext_resource path="res://Art Assets/Overworld/Dungeon Areas/Props/Large Stick_3.png" type="Texture" id=22]
+[ext_resource path="res://Art Assets/Overworld/Dungeon Areas/Props/Large Stick_2b.png" type="Texture" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 50 )
@@ -22,10 +30,17 @@ extents = Vector2( 50, 50 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 80, 80 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 2000, 60 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 60, 1000 )
+
 [node name="LocalMap" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Map" type="TileMap" parent="."]
+visible = false
 z_index = -1
 z_as_relative = false
 tile_set = ExtResource( 2 )
@@ -41,13 +56,14 @@ format = 1
 script = ExtResource( 4 )
 
 [node name="SpawningPoint" parent="GameBoard" instance=ExtResource( 5 )]
-position = Vector2( 620, 610 )
+position = Vector2( 353.618, 526.756 )
 
 [node name="Pawns" type="YSort" parent="GameBoard"]
 script = ExtResource( 6 )
 party_scene = ExtResource( 7 )
 
 [node name="EncounterPawn" parent="GameBoard/Pawns" instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 440, 600 )
 z_index = 3
 vanish_on_interaction = true
@@ -80,6 +96,7 @@ shape = SubResource( 2 )
 dialogue_file_path = "res://src/dialogue/data/test_conversation.json"
 
 [node name="DialogueCombatPawn" parent="GameBoard/Pawns" instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 1160, 600 )
 facing = {
 "down": true,
@@ -95,17 +112,125 @@ dialogue_file_path = "res://src/dialogue/data/test_conversation.json"
 formation = ExtResource( 10 )
 
 [node name="TestQuestGiver" parent="GameBoard/Pawns" instance=ExtResource( 12 )]
+visible = false
 position = Vector2( 1160, 200 )
 
 [node name="TestQuestReceiver" parent="GameBoard/Pawns" instance=ExtResource( 13 )]
+visible = false
 position = Vector2( 1330, 321.55 )
 
 [node name="TeekPawn" parent="GameBoard/Pawns" instance=ExtResource( 15 )]
-position = Vector2( 1098.45, 754.238 )
+position = Vector2( 714.328, 1540.86 )
 move_type = 1
 speed = 300.0
 agro_dist = 350.0
 wander_dist = 300.0
+
+[node name="TeekPawn2" parent="GameBoard/Pawns" instance=ExtResource( 15 )]
+position = Vector2( 2047.74, 213.793 )
+move_type = 1
+speed = 300.0
+agro_dist = 350.0
+wander_dist = 300.0
+
+[node name="TeekPawn3" parent="GameBoard/Pawns" instance=ExtResource( 15 )]
+position = Vector2( 2263.63, 1712.3 )
+move_type = 1
+speed = 300.0
+agro_dist = 350.0
+wander_dist = 300.0
+
+[node name="Environment" type="YSort" parent="GameBoard"]
+scale = Vector2( 1.32288, 1.32288 )
+script = ExtResource( 18 )
+
+[node name="3 Pebbles" type="Sprite" parent="GameBoard/Environment"]
+position = Vector2( 2050.93, 255.856 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 19 )
+offset = Vector2( 0, -50 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GameBoard/Environment/3 Pebbles"]
+position = Vector2( 0, -44.9475 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameBoard/Environment/3 Pebbles/StaticBody2D"]
+polygon = PoolVector2Array( -250.117, 71.1387, -224.526, 89.9953, -123.508, 91.3422, -80.4069, 99.4236, 59.6714, 106.158, 86.6091, 79.2201, 240.156, 67.0979, 254.972, 23.997, 55.6306, 28.0377, -68.2845, 32.0785, -236.648, 17.2625 )
+
+[node name="Stick" type="YSort" parent="GameBoard/Environment"]
+position = Vector2( 1279.24, 768.083 )
+scale = Vector2( 1, 1 )
+
+[node name="Large Stick_1" type="Sprite" parent="GameBoard/Environment/Stick"]
+position = Vector2( -255.963, 372.487 )
+texture = ExtResource( 20 )
+offset = Vector2( 0, -370 )
+
+[node name="Large Stick_2" type="Sprite" parent="GameBoard/Environment/Stick"]
+position = Vector2( -36.2339, 202.999 )
+texture = ExtResource( 21 )
+offset = Vector2( 0, -200 )
+
+[node name="Large Stick_2b" type="Sprite" parent="GameBoard/Environment/Stick"]
+position = Vector2( 145.531, -64.2657 )
+texture = ExtResource( 23 )
+offset = Vector2( 0, 70 )
+
+[node name="Large Stick_3" type="Sprite" parent="GameBoard/Environment/Stick"]
+position = Vector2( 304.093, -289.169 )
+texture = ExtResource( 22 )
+offset = Vector2( 0, 295 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="GameBoard/Environment/Stick"]
+z_index = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameBoard/Environment/Stick/StaticBody2D2"]
+polygon = PoolVector2Array( -342.025, 393.337, -277.228, 479.734, -210.03, 510.932, -126.033, 515.732, -37.2367, 417.336, 61.1597, 270.941, 166.756, 400.536, 176.355, 381.337, 159.556, 316.54, 207.554, 285.341, 202.754, 254.142, 135.557, 246.942, 121.157, 167.745, 130.757, 112.547, 377.948, -297.837, 169.156, -367.435, -351.625, 369.338 )
+
+[node name="Leaf Bridge" type="Sprite" parent="GameBoard/Environment"]
+position = Vector2( 2182.4, 585.472 )
+texture = ExtResource( 17 )
+offset = Vector2( 0, 200 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GameBoard/Environment"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GameBoard/Environment/StaticBody2D"]
+polygon = PoolVector2Array( 394.959, 40.8205, 407.432, 65.7657, 404.696, 249.634, 405.956, 418.463, 450.053, 516.737, 486.591, 570.914, 544.547, 608.711, 601.244, 611.231, 656.68, 594.852, 715.896, 545.715, 751.174, 462.56, 797.791, 378.146, 920.004, 303.81, 1071.19, 195.457, 1130.41, 75.7645, 1139.23, 0.16925, 371.938, 0.16925 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="GameBoard/Environment/StaticBody2D"]
+polygon = PoolVector2Array( -1.62195, 542.412, 70.6951, 574.366, 119.467, 619.775, 168.239, 710.591, 171.603, 811.499, 159.83, 897.27, 178.33, 976.315, 225.42, 1026.77, 255.692, 1062.09, 272.51, 1117.59, 280.919, 1159.63, 386.63, 1199.19, 462.226, 1289.91, 521.442, 1453.7, 546.64, 1570.87, -1.42538, 1575.91 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="GameBoard/Environment/StaticBody2D"]
+polygon = PoolVector2Array( 2457.88, 0.93277, 2448.97, 77.5501, 2454.32, 164.858, 2541.63, 268.202, 2568.35, 373.328, 2693.08, 492.709, 2805.33, 526.563, 2816.02, -13.3216 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="GameBoard/Environment/StaticBody2D"]
+polygon = PoolVector2Array( 1589.87, 1568.46, 1679.67, 1503.36, 1740.28, 1530.3, 1841.3, 1512.34, 1836.81, 1305.8, 1913.14, 1121.72, 2092.73, 951.106, 2086, 910.697, 2180.28, 924.167, 2292.53, 903.962, 2375.59, 975.8, 2508.04, 1072.33, 2615.8, 1213.76, 2775.19, 1231.72, 2797.64, 1238.46, 2802.13, 1575.19 )
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="GameBoard/Environment/StaticBody2D"]
+polygon = PoolVector2Array( 2166.82, 1.50284, 2119.67, 84.565, 2115.18, 147.423, 2151.1, 199.056, 2191.51, 239.465, 2207.22, 320.282, 2130.9, 425.793, 2090.49, 529.06, 2090.49, 634.571, 2112.94, 688.45, 2202.73, 699.674, 2312.74, 735.593, 2344.16, 654.776, 2341.92, 573.958, 2404.78, 423.549, 2447.43, 282.118, 2391.31, 138.443, 2344.16, 82.3201, 2389.06, 1.50284 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameBoard/Environment/StaticBody2D"]
+position = Vector2( 1515.32, -57.2779 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GameBoard/Environment/StaticBody2D"]
+position = Vector2( 1515.32, 1629.35 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GameBoard/Environment/StaticBody2D"]
+position = Vector2( -52.1142, 830.967 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="GameBoard/Environment/StaticBody2D"]
+position = Vector2( 2855.67, 830.967 )
+shape = SubResource( 4 )
+
+[node name="Map" type="Sprite" parent="GameBoard/Environment"]
+z_index = -1
+texture = ExtResource( 16 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="MapInterface" type="CanvasLayer" parent="."]
 pause_mode = 2

@@ -110,7 +110,21 @@ func play_chomp(target:Battler, actor:Battler):
 	$AttackPlayer.play("Chomp_Reset")
 	yield($AttackPlayer, "animation_finished")
 
-	
+
+func play_slice_opening(actor:Battler, targets):
+	var target_position = to_local(MIDDLE) + Vector2(140, 0)
+	AnimFunc.adjust_all_keys($AttackPlayer.get_animation("Slice_Success"), ".:position", target_position)
+	AnimFunc.set_last_key_value($AttackPlayer.get_animation("Slice_Success"), ".:position", Vector2(0,0))
+	#work backwards
+	AnimFunc.adjust_all_keys_backwards($AttackPlayer.get_animation("Slice_Attack"), ".:position", target_position)
+	$AttackPlayer.play("Slice_Attack")
+	yield($AttackPlayer, "animation_finished")
+	for target in targets:
+		var hit = Hit.new(actor.stats.strength/2)
+		target.take_damage(hit)
+	$AttackPlayer.play("Slice_Success")
+	yield($AttackPlayer, "animation_finished")
+		
 func play_slice(target:Battler, actor:Battler):
 	var target_position = to_local(target.skin.battler_anim.global_position) + Vector2(-140, 0)
 	#Set target positions, then work backwards

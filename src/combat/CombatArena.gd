@@ -36,6 +36,15 @@ func initialize(formation: Formation, party: Array):
 	turn_queue.initialize()
 
 
+func battle_pre_start():
+	play_intro(true)
+	var actor:Battler = turn_queue.get_party()[0]
+	#we assume we only attack with leafcutter and that he's first
+	yield(actor.skin.battler_anim.play_slice_opening(actor, turn_queue.get_monsters()), "completed")
+	interface.play_intro()
+	active = true
+	play_turn()
+
 func battle_start(type):
 	yield(play_intro(), "completed")
 	interface.play_intro()
@@ -43,13 +52,15 @@ func battle_start(type):
 	play_turn()
 
 
-func play_intro():
+func play_intro(skip=false):
 	for battler in turn_queue.get_party():
-		battler.appear()
-	yield(get_tree().create_timer(0.5), "timeout")
+		battler.appear(skip)
+	if not skip:
+		yield(get_tree().create_timer(0.5), "timeout")
 	for battler in turn_queue.get_monsters():
-		battler.appear()
-	yield(get_tree().create_timer(0.5), "timeout")
+		battler.appear(skip)
+	if not skip:
+		yield(get_tree().create_timer(0.5), "timeout")
 
 
 func ready_field(formation: Formation, party_members: Array):

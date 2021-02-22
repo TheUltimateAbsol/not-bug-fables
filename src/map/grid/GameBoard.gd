@@ -7,8 +7,16 @@ class_name GameBoard
 
 onready var pawns: YSort = $Pawns
 onready var spawning_point = $SpawningPoint
-		
+
+#also sets the camera for the player	
 func initialize():
+	#normally we get map size but today I accidentally resized it...
+	var factor = $Environment.scale.x
+	get_player().camera.limit_left = 0
+	get_player().camera.limit_top = 0
+	get_player().camera.limit_bottom = $Environment.get_extents().end.y*factor
+	get_player().camera.limit_right = $Environment.get_extents().end.x*factor
+	
 	for pawn in pawns.get_children():
 		pawn.initialize(self)
 

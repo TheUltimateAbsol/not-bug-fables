@@ -1,0 +1,320 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/sprites/Title Screen/Title Screen Cloud.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Title Screen/Title Screen Background.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/Title Screen/Title Screen Logo.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/local_map/Dungeon Areas/Props/Leaf Bridge.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/Game_Time.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/sprites/ui/Selection ARrow.png" type="Texture" id=6]
+[ext_resource path="res://src/main/TitleScene.gd" type="Script" id=7]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, 200, 0 )
+initial_velocity = 1000.0
+angular_velocity = -75.0
+angular_velocity_random = 0.48
+orbit_velocity = -0.02
+orbit_velocity_random = 0.0
+damping = 100.0
+angle = 255.2
+angle_random = 1.0
+scale = 2.0
+scale_random = 1.0
+hue_variation = 0.02
+hue_variation_random = 0.76
+
+[sub_resource type="Animation" id=2]
+resource_name = "loop"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 96
+outline_size = 6
+outline_color = Color( 0.87451, 0.87451, 0.87451, 1 )
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "loop"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Selection ARrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 810.813, 67.8339 ), Vector2( 789.6, 67.8339 ), Vector2( 810.813, 67.8339 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Intro"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Cloud:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1.2, 2.9 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -166.124 ), Vector2( 0, -166.124 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cloud:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 1.2, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Logo:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.7, 1.9, 2.1, 2.5, 2.9, 3 ),
+"transitions": PoolRealArray( 0.5, 0.5, 1, 0.5, 2, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -800 ), Vector2( 0, -800 ), Vector2( 0, -15.2654 ), Vector2( 0, -15.2654 ), Vector2( 0, -412.422 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Logo:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.7, 1.9, 2, 2.1, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Label:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 2.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ColorRect:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 2.8, 2.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("LEAVES:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 2.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "disable_skip"
+} ]
+}
+
+[node name="TitleScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+
+[node name="LEAVES" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="LEAVES"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="LEAVES/Control"]
+position = Vector2( 500, 0 )
+scale = Vector2( 0.25, 0.25 )
+lifetime = 20.0
+visibility_rect = Rect2( -2000, 0, 200, 200 )
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="Control2" type="Control" parent="LEAVES"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="LEAVES/Control2"]
+position = Vector2( 500, 0 )
+scale = Vector2( 0.25, 0.25 )
+amount = 4
+lifetime = 20.0
+visibility_rect = Rect2( -2000, -100, 200, 200 )
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="Control3" type="Control" parent="LEAVES"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -20.0
+margin_right = 20.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Particles2D" type="Particles2D" parent="LEAVES/Control3"]
+position = Vector2( 500, -100 )
+scale = Vector2( 0.25, 0.25 )
+amount = 4
+lifetime = 20.0
+visibility_rect = Rect2( -2000, 500, 200, 200 )
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="Cloud" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -166.124
+margin_bottom = -166.124
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="Cloud"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 1.08984, 1 )
+rect_pivot_offset = Vector2( 960, 0 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cloud/TextureRect2"]
+autoplay = "loop"
+anims/loop = SubResource( 2 )
+
+[node name="Logo" type="TextureRect" parent="."]
+margin_top = -800.0
+margin_right = 1920.0
+margin_bottom = 280.0
+rect_pivot_offset = Vector2( 960, 600 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 217.012
+margin_bottom = 314.012
+theme = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_as_outline = 0
+text = "Start"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Selection ARrow" type="Sprite" parent="Label"]
+position = Vector2( 794.182, 67.8339 )
+texture = ExtResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+autoplay = "loop"
+anims/loop = SubResource( 5 )
+
+[node name="IntroPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Intro"
+anims/Intro = SubResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0

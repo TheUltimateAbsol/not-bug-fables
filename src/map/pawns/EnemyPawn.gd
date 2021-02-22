@@ -35,6 +35,7 @@ var spotted:bool = false #allows for "notice" animations
 
 export var DRAW_COLOR_AGGRO := Color("#e231b6")
 export var DRAW_COLOR_WANDER := Color("#4169E1")
+export var DRAW_COLOR_AGGRO_LIMIT := Color("#add8e6")
 
 
 func draw_circle_donut_poly(center, inner_radius, outer_radius, angle_from, angle_to, color):  
@@ -56,12 +57,13 @@ func _draw() -> void:
 		return
 	draw_circle_donut_poly(Vector2(), agro_dist, agro_dist + 5, 0, 360, DRAW_COLOR_AGGRO)
 	draw_circle_donut_poly(Vector2(), wander_dist, wander_dist + 5, 0, 360, DRAW_COLOR_WANDER)
+	draw_circle_donut_poly(Vector2(), wander_dist*2, wander_dist*2 + 2, 0, 360, DRAW_COLOR_AGGRO_LIMIT)
 
 func set_agro(value):
 	agro = value
 	
 	if agro:
-		agro_area_collision.shape.set_radius(agro_dist * 2)
+		agro_area_collision.shape.set_radius(agro_dist * 1.5)
 	else:
 		agro_area_collision.shape.set_radius(agro_dist)
 
@@ -90,8 +92,12 @@ func _process(_delta):
 	
 	if freeze: return
 	
+	#not sure what this does
 	if(agro_area_collision.disabled):
 		agro = true
+	
+	if position.distance_to(starting_position) > wander_dist*2.0:
+		agro = false
 	
 	if(agro):
 		_on_agro()
@@ -217,6 +223,7 @@ func _on_agro():
 	if not spotted: 
 		freeze = true
 		spotted = true
+		anim.flip(position.direction_to(game_board.get_player().position))
 		yield(anim.play_alert(), "completed")
 		freeze = false
 	target_position = game_board.get_player().position
