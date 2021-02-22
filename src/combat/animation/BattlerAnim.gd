@@ -6,6 +6,8 @@ export(NodePath) var battler_node
 onready var anim = $AnimationPlayer
 onready var extents: RectExtents = $RectExtents
 
+const MessageLabel = preload("res://src/combat/interface/MessageLabel.tscn")
+
 const MIDDLE = Vector2(966, 663)
 
 func _ready():
@@ -22,7 +24,17 @@ func play_death():
 #TODO: separate this out into different classses in the future 
 #so each character has their own anim file
 	
-
+func spawn_message(target, type):
+	var message = MessageLabel.instance()
+	message.initialize(type)
+	#if on right side
+	if target.target_global_position.x >= MIDDLE.x:
+		message.rect_position = Vector2(-400, -400)
+	#if on left side
+	else:
+		message.rect_position = Vector2(150, -400)
+	target.add_child(message)
+	message.play()
 	
 func play_shoot(target:Battler, actor:Battler):
 	#set target position
@@ -37,6 +49,7 @@ func play_shoot(target:Battler, actor:Battler):
 	$AttackPlayer.play("Shoot_Windup")
 	yield($AttackPlayer, "attack_ended")
 	if $AttackPlayer.input_received == true:
+		spawn_message(actor, Globals.MESSAGE_TYPES.GOOD)
 		$AttackPlayer.play("Shoot_Success")
 		yield($AttackPlayer, "animation_finished")
 		var hit = Hit.new(actor.stats.strength)
@@ -44,10 +57,12 @@ func play_shoot(target:Battler, actor:Battler):
 		$AttackPlayer.play("Shoot_Success_Hit")
 		yield($AttackPlayer, "animation_finished")
 	else:
+		spawn_message(actor, Globals.MESSAGE_TYPES.MISS)
 		$AttackPlayer.play("Shoot_Fail")
 		yield($AttackPlayer, "animation_finished")
 		var hit = Hit.new(actor.stats.strength/2)
 		target.take_damage(hit)
+		
 		$AttackPlayer.play("Shoot_Fail2")
 		yield($AttackPlayer, "animation_finished")
 	
@@ -78,6 +93,7 @@ func play_lunge(target:Battler, actor:Battler):
 		var hit = Hit.new(actor.stats.strength*0.5)
 		target.take_damage(hit)
 		target.skin.battler_anim.block()
+		spawn_message(target, Globals.MESSAGE_TYPES.BLOCK)
 	else:
 		var hit = Hit.new(actor.stats.strength)
 		target.take_damage(hit)
@@ -103,6 +119,7 @@ func play_chomp(target:Battler, actor:Battler):
 		var hit = Hit.new(actor.stats.strength*0.5)
 		target.take_damage(hit)
 		target.skin.battler_anim.block()
+		spawn_message(target, Globals.MESSAGE_TYPES.BLOCK)
 	else:
 		var hit = Hit.new(actor.stats.strength)
 		target.take_damage(hit)
@@ -143,11 +160,13 @@ func play_slice(target:Battler, actor:Battler):
 	$AttackPlayer.play("Slice_Attack")
 	yield($AttackPlayer, "attack_ended")
 	if $AttackPlayer.input_received == true:
+		spawn_message(target, Globals.MESSAGE_TYPES.GOOD)
 		var hit = Hit.new(actor.stats.strength)
 		target.take_damage(hit)
 		$AttackPlayer.play("Slice_Success")
 		print("hi")
 	else:
+		spawn_message(target, Globals.MESSAGE_TYPES.MISS)
 		var hit = Hit.new(actor.stats.strength*0.5)
 		target.take_damage(hit)
 		$AttackPlayer.play("Slice_Fail")

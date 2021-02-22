@@ -24,6 +24,7 @@ func _ready():
 	local_map.spawn_party(party)
 	local_map.visible = true
 	local_map.connect("enemies_encountered", self, "enter_battle")
+	music_player.play_map_theme()
 
 #This might break that cool thing we did to make sure attacks end nicely...
 func freeze_node(node, freeze):
@@ -48,7 +49,8 @@ func enter_battle(formation: Formation, start_type, enemy:EnemyPawn):
 	engaged_enemy = enemy
 
 	gui.hide()
-	music_player.play_battle_theme()
+
+	music_player.stop()
 
 	transitioning = true
 	freeze_scene(local_map, true)
@@ -59,6 +61,8 @@ func enter_battle(formation: Formation, start_type, enemy:EnemyPawn):
 		hit.global_position = enemy.global_position
 		yield(hit, "finished")
 		hit.queue_free()
+	
+	music_player.play_battle_theme()
 	
 	yield(transition.fade_to_color(), "completed")
 
@@ -99,7 +103,7 @@ func _on_CombatArena_battle_completed(arena):
 	add_child(local_map)
 	yield(transition.fade_from_color(), "completed")
 	transitioning = false
-	music_player.stop()
+	music_player.play_map_theme()
 
 
 func _on_CombatArena_player_victory():

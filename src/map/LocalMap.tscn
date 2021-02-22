@@ -134,7 +134,7 @@ agro_dist = 350.0
 wander_dist = 300.0
 
 [node name="TeekPawn3" parent="GameBoard/Pawns" instance=ExtResource( 15 )]
-position = Vector2( 2263.63, 1712.3 )
+position = Vector2( 2353.53, 1340.72 )
 move_type = 1
 speed = 300.0
 agro_dist = 350.0
@@ -146,7 +146,6 @@ script = ExtResource( 18 )
 
 [node name="3 Pebbles" type="Sprite" parent="GameBoard/Environment"]
 position = Vector2( 2050.93, 255.856 )
-scale = Vector2( 1, 1 )
 texture = ExtResource( 19 )
 offset = Vector2( 0, -50 )
 
@@ -158,7 +157,6 @@ polygon = PoolVector2Array( -250.117, 71.1387, -224.526, 89.9953, -123.508, 91.3
 
 [node name="Stick" type="YSort" parent="GameBoard/Environment"]
 position = Vector2( 1279.24, 768.083 )
-scale = Vector2( 1, 1 )
 
 [node name="Large Stick_1" type="Sprite" parent="GameBoard/Environment/Stick"]
 position = Vector2( -255.963, 372.487 )

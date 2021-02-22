@@ -345,7 +345,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot Open RPG"
-run/main_scene="res://src/main/Game.tscn"
+run/main_scene="res://src/main/TitleScene.tscn"
 config/icon="res://icon.png"
 config/version="0.3.0"
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bgm_maoudamashii_piano12.ogg-fac47edcee0e55b08c39f31ee025e1d3.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/bgm/bgm_maoudamashii_piano12.ogg"
+dest_files=[ "res://.import/bgm_maoudamashii_piano12.ogg-fac47edcee0e55b08c39f31ee025e1d3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
