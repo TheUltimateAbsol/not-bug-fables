@@ -94,7 +94,7 @@ func _on_body_exited(body: PhysicsBody2D) -> void:
 
 
 func start_interaction() -> void:
-	# Pauses the game and play each action under the $Actions node
+	# Pauses the gamegame and play each action under the $Actions node
 	# Actions that transition to another scene (e.g. StartCombatAction) may unpause
 	# the game themselves
 	# PawnInteractive processes even when the game is paused, but not

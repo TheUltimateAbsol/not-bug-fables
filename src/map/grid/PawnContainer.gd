@@ -17,6 +17,7 @@ func spawn_party(game_board, party: Object) -> void:
 	#can add more characters in the future
 	party_members.append(spawn_pawn(party.get_child(0), game_board, null, true))
 
+
 #For now, we're only spawning the leader person
 func spawn_pawn(
 	party_member: PartyMember, game_board: GameBoard, pawn_previous: Object, is_leader: bool = false

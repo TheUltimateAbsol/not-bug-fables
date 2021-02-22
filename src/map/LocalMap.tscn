@@ -36,6 +36,7 @@ tile_data = PoolIntArray( -524296, 1, 0, -524295, 1, 0, -524294, 1, 0, -524293, 
 [node name="GameBoard" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 80, 80 )
+cell_y_sort = true
 format = 1
 script = ExtResource( 4 )
 
@@ -100,8 +101,11 @@ position = Vector2( 1160, 200 )
 position = Vector2( 1330, 321.55 )
 
 [node name="TeekPawn" parent="GameBoard/Pawns" instance=ExtResource( 15 )]
-position = Vector2( 955.637, 689.65 )
-agro_dist = 100.0
+position = Vector2( 1098.45, 754.238 )
+move_type = 1
+speed = 300.0
+agro_dist = 350.0
+wander_dist = 300.0
 
 [node name="MapInterface" type="CanvasLayer" parent="."]
 pause_mode = 2

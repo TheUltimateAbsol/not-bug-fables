@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/sprites/local_map/characters/Leafcutter (Overworld)/Leafcutter (Slice)/Leafcutter (Slash)003.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=14]
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=1]
 resource_name = "Attack"
 length = 0.51
 step = 0.083
@@ -80,7 +80,7 @@ tracks/4/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "Idle"
 loop = true
 tracks/0/type = "value"
@@ -96,7 +96,7 @@ tracks/0/keys = {
 "values": [ "default" ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Walk"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Root/AnimatedSprite:animation")
@@ -123,7 +123,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 9 ) ],
 "loop": true,
@@ -141,25 +141,25 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=5]
 radius = 125.0
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=6]
 radius = 100.0
 
 [node name="GodettePawnAnim" instance=ExtResource( 1 )]
 
 [node name="CharacterAnimation" type="AnimationPlayer" parent="." index="1"]
-anims/Attack = SubResource( 6 )
-anims/Idle = SubResource( 5 )
-anims/Walk = SubResource( 4 )
+anims/Attack = SubResource( 1 )
+anims/Idle = SubResource( 2 )
+anims/Walk = SubResource( 3 )
 
 [node name="shadow" type="Sprite" parent="." index="2"]
 texture = ExtResource( 14 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Root" index="0"]
 position = Vector2( 0, -10 )
-frames = SubResource( 1 )
+frames = SubResource( 4 )
 animation = "attack"
 frame = 6
 offset = Vector2( 40, -110 )
@@ -173,7 +173,7 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Root/SwordHitbox" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 disabled = true
 
 [node name="Hitbox" type="Area2D" parent="Root" index="2" groups=[
@@ -184,5 +184,4 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Root/Hitbox" index="0"]
 position = Vector2( 0, -83.6789 )
-shape = SubResource( 8 )
-disabled = true
+shape = SubResource( 6 )

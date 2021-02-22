@@ -2,23 +2,23 @@ tool
 # Set to Stop during pause
 extends KinematicBody2D
 #
-export var DRAW_COLOR := Color("#e231b6")
 class_name EnemyPawn
 export var formation: PackedScene
 export var patrol_path_nodepath : NodePath
 onready var patrol_path : Path2D
-
+onready var anim = $Pivot/PawnAnim
 enum MOVE_TYPE {PATROL, WANDER, IDLE}
 export(MOVE_TYPE) var move_type
 
-var game_board
+var game_board: GameBoard
 var local_map
 #onready var anim: PawnAnim = pivot.get_node("PawnAnim")
 
 #"BORROWED" CODE ########################################3
 export var attack_speed := 1.0
-export var speed := 80.0
-export(float) var agro_dist := 100.0
+export var speed := 100.0
+export(float) var agro_dist := 300.0
+export(float) var wander_dist := 500.0
 onready var agro_area_collision : CollisionShape2D = $AgroArea/CollisionShape2D
 onready var raycasts := [$RayCastDown, $RayCastLeft, $RayCastUp, $RayCastRight]
 export var attack_range := Vector2(2.0, 2.0)
@@ -27,6 +27,15 @@ onready var attack_timer : Timer = $AttackTimer
 var patrol_direction := 1
 var agro := false setget set_agro
 var target_position := position
+var starting_position:Vector2
+enum STATES {WALK, COOLDOWN}
+var state = STATES.WALK
+var freeze:bool = false #allows for enemy to stop
+var spotted:bool = false #allows for "notice" animations
+
+export var DRAW_COLOR_AGGRO := Color("#e231b6")
+export var DRAW_COLOR_WANDER := Color("#4169E1")
+
 
 func draw_circle_donut_poly(center, inner_radius, outer_radius, angle_from, angle_to, color):  
 	var nb_points = 32  
@@ -45,7 +54,8 @@ func draw_circle_donut_poly(center, inner_radius, outer_radius, angle_from, angl
 func _draw() -> void:
 	if not Engine.editor_hint:
 		return
-	draw_circle_donut_poly(Vector2(), agro_dist, agro_dist + 5, 0, 360, DRAW_COLOR)
+	draw_circle_donut_poly(Vector2(), agro_dist, agro_dist + 5, 0, 360, DRAW_COLOR_AGGRO)
+	draw_circle_donut_poly(Vector2(), wander_dist, wander_dist + 5, 0, 360, DRAW_COLOR_WANDER)
 
 func set_agro(value):
 	agro = value
@@ -56,6 +66,9 @@ func set_agro(value):
 		agro_area_collision.shape.set_radius(agro_dist)
 
 func _ready():
+	if Engine.editor_hint:
+		return
+	
 	attack_timer.set_wait_time(1.0 / attack_speed)
 	attack_timer.start()
 	
@@ -64,35 +77,53 @@ func _ready():
 	agro_area_collision.shape.set_radius(agro_dist)
 	
 	for raycast in raycasts:
-		#raycast.add_exception(PlayerStats.player)
 		target_position += Vector2.RIGHT.rotated(randf() * 2 * PI)
 	
 	if(move_type == MOVE_TYPE.PATROL):
 		patrol_path = get_node(patrol_path_nodepath)
+		
+	starting_position = position
 
 func _process(_delta):
+	if Engine.editor_hint:
+		return
+	
+	if freeze: return
+	
 	if(agro_area_collision.disabled):
 		agro = true
 	
 	if(agro):
-		#target_position = PlayerStats.player.position
-		if((target_position - position).length() < attack_range.x * 32):
-			if(attack_timer.time_left == 0.0):
-				attack_timer.start()
-				attack_timer.connect("timeout", self, "attack", [target_position - position], CONNECT_ONESHOT)
+		_on_agro()
+		#attack code
+#		if((target_position - position).length() < attack_range.x * 32):
+##			if(attack_timer.time_left == 0.0):
+##				attack_timer.start()
+##				attack_timer.connect("timeout", self, "attack", [target_position - position], CONNECT_ONESHOT)
 	else:
+		spotted = false
+		anim.play_idle()
 		match(move_type):
 			MOVE_TYPE.PATROL:
 				patrol(_delta)
 			MOVE_TYPE.WANDER:
-				wander(_delta)
+				#prioritize moving back into area
+				if position.distance_to(starting_position) > wander_dist:
+					wander(_delta)
+				else:
+					match(state):
+						STATES.COOLDOWN: 
+							target_position = position
+						STATES.WALK: wander(_delta)
 			MOVE_TYPE.IDLE:
 				target_position = position
 	
-	get_node("../Sprite").position = target_position
+	#what does this do?
+	#get_node("../Sprite").position = target_position
 	
 	var velocity = target_position - position
-	velocity = velocity.normalized() * min(velocity.length(), speed)
+	velocity = velocity.normalized() * speed #min(velocity.length(), speed)
+	anim.flip(velocity)
 	move_and_slide(velocity)
 
 func take_damage(damage : float, direction : Vector2, force := 5.0):
@@ -122,8 +153,10 @@ func patrol(_delta : float):
 			patrol_direction *= -1
 
 func wander(_delta : float):
-	var direction = target_position - position
+	var direction = (target_position - position).normalized()
 	direction = direction.rotated(rand_range(-5.0, 5.0) * _delta)
+	if direction == Vector2():
+		direction = Vector2(1, 0).rotated(rand_range(0, 2*PI))
 	
 	var obstacles := []
 	for i in range(get_slide_count()):
@@ -131,6 +164,10 @@ func wander(_delta : float):
 	for raycast in raycasts:
 		if(raycast.is_colliding()):
 			obstacles.append(raycast.cast_to.normalized())
+			
+	#keep in bounds
+	if position.distance_to(starting_position) > wander_dist:
+		obstacles.append(starting_position.direction_to(position))
 	
 	if(obstacles != []):
 		direction = Vector2.ZERO
@@ -141,34 +178,49 @@ func wander(_delta : float):
 	target_position = position + direction.normalized() * speed
 
 func _on_AgroArea_body_entered(body):
-	pass
-#	if body == PlayerStats.player:
-#		set_agro(true)
+	if body == game_board.get_player():
+		set_agro(true)
 
 func _on_AgroArea_body_exited(body):
-	pass
-#	if(body == PlayerStats.player):
-#		set_agro(false)
+	if(body == game_board.get_player()):
+		set_agro(false)
 
 ##################################################################################
 
-
-
-#What's the point of this function????
+#This will fire AFTER the player is on the map
 func initialize(board):
 	game_board = board
-	print("initialized gameboard")
+	#make sure the enemy actually tries hitting players
+	for raycast in raycasts:
+		raycast.add_exception(board.get_player())
 	
 func initialize_action(map):
 	local_map = map
-	print("initialized localmap")
 	$Pivot/PawnAnim.connect("encountered", self, "encounter_start")
 
 func encounter_start(type):
 	print("Encountered ", type)
 	get_tree().paused = false
-	local_map.start_encounter(formation)
-	
-	#need to add some way of deleting after the battle is over
-	queue_free()
+	local_map.start_encounter(formation, type, self)
 
+func _on_CooldownTimer_timeout():
+	state = STATES.WALK
+	$WalkTimer.start()
+
+
+func _on_WalkTimer_timeout():
+	state = STATES.COOLDOWN
+	$CooldownTimer.start()
+
+#needs to jump for a sec and then chase
+func _on_agro():
+	if not spotted: 
+		freeze = true
+		spotted = true
+		yield(anim.play_alert(), "completed")
+		freeze = false
+	target_position = game_board.get_player().position
+	anim.play_walk()
+	
+	
+	

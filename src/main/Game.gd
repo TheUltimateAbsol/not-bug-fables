@@ -1,9 +1,11 @@
 # Responsible for transitions between the main game screens:
 # combat, game over, and the map
 extends Node
+class_name Game #maybe we should save this for something else?
 
 signal combat_started
 
+enum BATTLE_OPENING_TYPES {STANDARD, PLAYER_HIT, ENEMY_HIT}
 const combat_arena_scene = preload("res://src/combat/CombatArena.tscn")
 onready var transition = $Overlays/TransitionColor
 onready var local_map = $LocalMap
@@ -14,6 +16,7 @@ onready var gui := $GUI
 
 var transitioning = false
 var combat_arena: CombatArena
+var engaged_enemy:EnemyPawn = null
 
 
 func _ready():
@@ -23,10 +26,14 @@ func _ready():
 	local_map.connect("enemies_encountered", self, "enter_battle")
 
 
-func enter_battle(formation: Formation):
+func enter_battle(formation: Formation, start_type, enemy:EnemyPawn):
+	print(start_type)
 	# Plays the combat transition animation and initializes the combat scene
+	# not sure what this line here is for. Looks like someone's crappy patch!
 	if transitioning:
 		return
+
+	engaged_enemy = enemy
 
 	gui.hide()
 	music_player.play_battle_theme()
@@ -47,7 +54,7 @@ func enter_battle(formation: Formation):
 	yield(transition.fade_from_color(), "completed")
 	transitioning = false
 
-	combat_arena.battle_start()
+	combat_arena.battle_start(start_type)
 	emit_signal("combat_started")
 
 
@@ -59,6 +66,10 @@ func _on_CombatArena_battle_completed(arena):
 	transitioning = true
 	yield(transition.fade_to_color(), "completed")
 	combat_arena.queue_free()
+	
+	#TODO: add some sort of defeat animation
+	if engaged_enemy:
+		engaged_enemy.queue_free()
 
 	add_child(local_map)
 	yield(transition.fade_from_color(), "completed")
@@ -82,4 +93,4 @@ func _on_GameOverInterface_restart_requested():
 	game_over_interface.hide()
 	var formation = combat_arena.initial_formation
 	combat_arena.queue_free()
-	enter_battle(formation)
+	enter_battle(formation, 0, engaged_enemy)

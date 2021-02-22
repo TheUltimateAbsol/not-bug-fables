@@ -36,7 +36,7 @@ func initialize(formation: Formation, party: Array):
 	turn_queue.initialize()
 
 
-func battle_start():
+func battle_start(type):
 	yield(play_intro(), "completed")
 	interface.play_intro()
 	active = true

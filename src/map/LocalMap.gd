@@ -4,7 +4,7 @@
 extends Node
 class_name LocalMap
 
-signal enemies_encountered(formation)
+signal enemies_encountered(formation, type, enemy_pawn)
 signal dialogue_finished
 
 onready var dialogue_box = $MapInterface/DialogueBox
@@ -19,12 +19,13 @@ func _ready() -> void:
 	for enemy in get_tree().get_nodes_in_group("map_enemy"):
 		(enemy as EnemyPawn).initialize_action(self)
 
-
 func spawn_party(party) -> void:
 	grid.pawns.spawn_party(grid, party)
+	#we initialize after the party spawns so that pawns can use party information
+	grid.initialize()
 
-func start_encounter(formation) -> void:
-	emit_signal("enemies_encountered", formation.instance())
+func start_encounter(formation, type, enemy_pawn:EnemyPawn=null) -> void:
+	emit_signal("enemies_encountered", formation.instance(), type, enemy_pawn)
 
 
 func play_dialogue(data):

@@ -4,7 +4,7 @@ extends KinematicBody2D
 #
 class_name PawnLeader
 
-const RUN_SPEED = 10.0
+const RUN_SPEED = 8.0
 
 var _path_current := PoolVector3Array()
 var _direction := Vector2()

@@ -7,11 +7,11 @@
 [ext_resource path="res://src/combat/battlers/formations/PorcupineFormation001.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/battlers/shadow.png" type="Texture" id=6]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 27.3152
 height = 38.1507
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=2]
 radius = 0.01
 
 [sub_resource type="Animation" id=3]
@@ -67,33 +67,6 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "Approach"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Root/AnimatedSprite:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ "walk" ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Root/AnimatedSprite:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
 [sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Root/AnimatedSprite:animation")
@@ -120,6 +93,33 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "Walk"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walk" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Root/AnimatedSprite:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="CircleShape2D" id=6]
 radius = 61.0536
 
@@ -129,18 +129,46 @@ radius = 61.0536
 collision_layer = 5
 script = ExtResource( 1 )
 formation = ExtResource( 5 )
+speed = 1000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -25.2695 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AgroArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AgroArea"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+
+[node name="RayCastDown" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 100 )
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -100, 0 )
+
+[node name="RayCastUp" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -100 )
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 100, 0 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
 
 [node name="Pivot" type="Position2D" parent="."]
 
@@ -149,8 +177,8 @@ script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/PawnAnim"]
 anims/Alert = SubResource( 3 )
-anims/Approach = SubResource( 4 )
 anims/Idle = SubResource( 5 )
+anims/Walk = SubResource( 4 )
 
 [node name="shadow" type="Sprite" parent="Pivot/PawnAnim"]
 scale = Vector2( 0.5, 0.5 )
@@ -163,7 +191,10 @@ position = Vector2( -10.3181, -46.0346 )
 scale = Vector2( 0.3, 0.3 )
 frames = ExtResource( 2 )
 animation = "idle"
+frame = 1
 playing = true
+offset = Vector2( 50, 0 )
+flip_h = true
 
 [node name="Hitbox" type="Area2D" parent="Pivot/PawnAnim/Root"]
 position = Vector2( -10.1021, -39.8474 )
@@ -175,4 +206,8 @@ shape = SubResource( 6 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Pivot/PawnAnim/Root"]
 stream = ExtResource( 3 )
+[connection signal="body_entered" from="AgroArea" to="." method="_on_AgroArea_body_entered"]
+[connection signal="body_exited" from="AgroArea" to="." method="_on_AgroArea_body_exited"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_CooldownTimer_timeout"]
+[connection signal="timeout" from="WalkTimer" to="." method="_on_WalkTimer_timeout"]
 [connection signal="area_entered" from="Pivot/PawnAnim/Root/Hitbox" to="Pivot/PawnAnim" method="_on_area_entered"]
