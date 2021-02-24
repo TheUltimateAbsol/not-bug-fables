@@ -15,6 +15,8 @@
 - Title theme: http://en.maoudamashii.com/archives/bgm_maoudamashii_piano12.html
 - bush shake sound: https://freesound.org/people/BerduSmith/sounds/335401/
 - thud sound: https://freesound.org/people/yummy9987/sounds/494931/
+- slide whistle: https://freesound.org/people/InspectorJ/sounds/410804/
+- confirmation sound: https://freesound.org/people/JavierZumer/sounds/257227/
 
 ## Layers
 - 1: Physics
